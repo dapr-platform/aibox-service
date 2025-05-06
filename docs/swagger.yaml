@@ -1,0 +1,1245 @@
+basePath: /swagger/aibox-service
+definitions:
+  common.Page:
+    properties:
+      items: {}
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.Response:
+    properties:
+      data: {}
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  model.Aibox_active_event_stats:
+    properties:
+      event_count:
+        description: 事件数量
+        type: integer
+      level:
+        description: 事件级别
+        type: integer
+      level_name:
+        description: 事件级别名称
+        type: string
+    type: object
+  model.Aibox_device:
+    properties:
+      build_time_str:
+        description: 设备构建时间
+        type: string
+      created_by:
+        description: created_by
+        type: string
+      created_time:
+        description: created_time
+        type: string
+      id:
+        description: 设备ID
+        type: string
+      ip:
+        description: 设备IP地址
+        type: string
+      latest_heart_beat_time:
+        description: 最近心跳时间
+        type: string
+      name:
+        description: 设备名称
+        type: string
+      status:
+        description: 设备状态(0:离线，1:在线)
+        type: integer
+      updated_by:
+        description: updated_by
+        type: string
+      updated_time:
+        description: updated_time
+        type: string
+    type: object
+  model.Aibox_device_info:
+    properties:
+      active_event_count:
+        description: 活动事件总数
+        type: integer
+      build_time_str:
+        description: 设备构建时间
+        type: string
+      critical_event_count:
+        description: 紧急事件数
+        type: integer
+      id:
+        description: 设备ID
+        type: string
+      ip:
+        description: 设备IP地址
+        type: string
+      latest_heart_beat_time:
+        description: 最近心跳时间
+        type: string
+      major_event_count:
+        description: 严重事件数
+        type: integer
+      minor_event_count:
+        description: 轻微事件数
+        type: integer
+      name:
+        description: 设备名称
+        type: string
+      status:
+        description: 设备状态(0:离线，1:在线)
+        type: integer
+      status_name:
+        description: 设备状态名称
+        type: string
+      warning_event_count:
+        description: 警告事件数
+        type: integer
+    type: object
+  model.Aibox_event:
+    properties:
+      content:
+        description: 事件内容
+        type: string
+      created_by:
+        description: created_by
+        type: string
+      created_time:
+        description: created_time
+        type: string
+      device_id:
+        description: 关联设备ID
+        type: string
+      dn:
+        description: 设备编号
+        type: string
+      id:
+        description: 事件ID
+        type: string
+      level:
+        description: 事件级别(1:紧急, 2:严重, 3:轻微, 4:警告)
+        type: integer
+      picstr:
+        description: 图片信息
+        type: string
+      status:
+        description: 事件状态(0:清除, 1:活动)
+        type: integer
+      title:
+        description: 事件标题
+        type: string
+      updated_by:
+        description: updated_by
+        type: string
+      updated_time:
+        description: updated_time
+        type: string
+    type: object
+  model.Aibox_event_info:
+    properties:
+      content:
+        description: 事件内容
+        type: string
+      created_time:
+        description: 创建时间
+        type: string
+      device_id:
+        description: 关联设备ID
+        type: string
+      device_ip:
+        description: 设备IP地址
+        type: string
+      device_name:
+        description: 设备名称
+        type: string
+      device_status:
+        description: 设备状态
+        type: integer
+      device_status_name:
+        description: 设备状态名称
+        type: string
+      dn:
+        description: 设备编号
+        type: string
+      id:
+        description: 事件ID
+        type: string
+      level:
+        description: 事件级别(1:紧急, 2:严重, 3:轻微, 4:警告)
+        type: integer
+      level_name:
+        description: 事件级别名称
+        type: string
+      picstr:
+        description: 图片信息
+        type: string
+      status:
+        description: 事件状态(0:清除, 1:活动)
+        type: integer
+      status_name:
+        description: 事件状态名称
+        type: string
+      title:
+        description: 事件标题
+        type: string
+      updated_time:
+        description: 更新时间
+        type: string
+    type: object
+info:
+  contact: {}
+  description: aibox-service API
+  title: aibox-service API
+  version: "1.0"
+paths:
+  /aibox-active-event-stats:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: level_name
+        in: query
+        name: level_name
+        type: string
+      - description: event_count
+        in: query
+        name: event_count
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_active_event_stats'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子活动事件统计视图
+  /aibox-active-event-stats/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: level_name
+        in: query
+        name: level_name
+        type: string
+      - description: event_count
+        in: query
+        name: event_count
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_active_event_stats'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子活动事件统计视图
+  /aibox-device:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: build_time_str
+        in: query
+        name: build_time_str
+        type: string
+      - description: latest_heart_beat_time
+        in: query
+        name: latest_heart_beat_time
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_device'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子设备
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_device'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_device'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子设备
+  /aibox-device-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: build_time_str
+        in: query
+        name: build_time_str
+        type: string
+      - description: latest_heart_beat_time
+        in: query
+        name: latest_heart_beat_time
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: active_event_count
+        in: query
+        name: active_event_count
+        type: string
+      - description: critical_event_count
+        in: query
+        name: critical_event_count
+        type: string
+      - description: major_event_count
+        in: query
+        name: major_event_count
+        type: string
+      - description: minor_event_count
+        in: query
+        name: minor_event_count
+        type: string
+      - description: warning_event_count
+        in: query
+        name: warning_event_count
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_device_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子设备信息视图
+  /aibox-device-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: build_time_str
+        in: query
+        name: build_time_str
+        type: string
+      - description: latest_heart_beat_time
+        in: query
+        name: latest_heart_beat_time
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: active_event_count
+        in: query
+        name: active_event_count
+        type: string
+      - description: critical_event_count
+        in: query
+        name: critical_event_count
+        type: string
+      - description: major_event_count
+        in: query
+        name: major_event_count
+        type: string
+      - description: minor_event_count
+        in: query
+        name: minor_event_count
+        type: string
+      - description: warning_event_count
+        in: query
+        name: warning_event_count
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_device_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子设备信息视图
+  /aibox-device/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_device'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子设备
+  /aibox-device/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子设备
+  /aibox-device/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - AI盒子设备
+  /aibox-device/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: build_time_str
+        in: query
+        name: build_time_str
+        type: string
+      - description: latest_heart_beat_time
+        in: query
+        name: latest_heart_beat_time
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_device'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子设备
+  /aibox-event:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: dn
+        in: query
+        name: dn
+        type: string
+      - description: title
+        in: query
+        name: title
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: content
+        in: query
+        name: content
+        type: string
+      - description: picstr
+        in: query
+        name: picstr
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_event'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子事件
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_event'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_event'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子事件
+  /aibox-event-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: dn
+        in: query
+        name: dn
+        type: string
+      - description: title
+        in: query
+        name: title
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: content
+        in: query
+        name: content
+        type: string
+      - description: picstr
+        in: query
+        name: picstr
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: level_name
+        in: query
+        name: level_name
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_ip
+        in: query
+        name: device_ip
+        type: string
+      - description: device_status
+        in: query
+        name: device_status
+        type: string
+      - description: device_status_name
+        in: query
+        name: device_status_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_event_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子事件详情视图
+  /aibox-event-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: dn
+        in: query
+        name: dn
+        type: string
+      - description: title
+        in: query
+        name: title
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: content
+        in: query
+        name: content
+        type: string
+      - description: picstr
+        in: query
+        name: picstr
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: level_name
+        in: query
+        name: level_name
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: device_name
+        in: query
+        name: device_name
+        type: string
+      - description: device_ip
+        in: query
+        name: device_ip
+        type: string
+      - description: device_status
+        in: query
+        name: device_status
+        type: string
+      - description: device_status_name
+        in: query
+        name: device_status_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_event_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子事件详情视图
+  /aibox-event/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_event'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子事件
+  /aibox-event/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子事件
+  /aibox-event/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - AI盒子事件
+  /aibox-event/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: dn
+        in: query
+        name: dn
+        type: string
+      - description: title
+        in: query
+        name: title
+        type: string
+      - description: device_id
+        in: query
+        name: device_id
+        type: string
+      - description: content
+        in: query
+        name: content
+        type: string
+      - description: picstr
+        in: query
+        name: picstr
+        type: string
+      - description: level
+        in: query
+        name: level
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_event'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子事件
+swagger: "2.0"
