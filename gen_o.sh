@@ -1,5 +1,5 @@
-dp-cli gen --connstr "postgresql://things:things2024@localhost:5432/thingsdb?sslmode=disable" \
---tables=o_user,o_client_info --model_naming "{{ toUpperCamelCase ( replace . \"o_\" \"\") }}"  \
+dp-cli gen --connstr "postgresql://things:things2024@ali4:37104/thingsdb?sslmode=disable" \
+--tables=o_aibox_device,o_aibox_event --model_naming "{{ toUpperCamelCase ( replace . \"o_\" \"\") }}"  \
 --file_naming "{{ toLowerCamelCase ( replace . \"o_\" \"\") }}" \
---module aibox-service
+--module aibox-service --api RUDB
 

@@ -1,15 +1,17 @@
 package main
 
 import (
+	"aibox-service/api"
+	_ "aibox-service/docs"
+	"net/http"
+	"os"
+	"strconv"
+
 	"github.com/dapr-platform/common"
 	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	httpSwagger "github.com/swaggo/http-swagger"
-	"net/http"
-	"os"
-	"strconv"
-	_ "aibox-service/docs"
 )
 
 var (
@@ -32,6 +34,7 @@ func main() {
 	mux := chi.NewRouter()
 	mux.Handle("/metrics", promhttp.Handler())
 	mux.Handle("/swagger*", httpSwagger.WrapHandler)
+	api.InitRoute(mux)
 	s := daprd.NewServiceWithMux(":"+strconv.Itoa(PORT), mux)
 	common.Logger.Debug("server start")
 	if err := s.Start(); err != nil && err != http.ErrServerClosed {
