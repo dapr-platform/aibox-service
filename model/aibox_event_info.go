@@ -38,7 +38,7 @@ Table: v_aibox_event_info
 
 JSON Sample
 -------------------------------------
-{    "id": "dLwmcOcHTwRpXBySyCtlUURdr",    "dn": "NOhEoXSfKZjkumpKKOQgOSiUG",    "title": "HtdIECwQJMcdxxBJdelKeNakZ",    "device_id": "uPsHXlNfFmadRRqmqfMgfrOEL",    "content": "HOAsTrxdbWtgSZiFfskowRyGS",    "picstr": "DfOTSBZvuXbRgpcnChorajfbg",    "level": 84,    "level_name": "ZgMyXdbKpXvIxGBxDGYphvTAO",    "status": 78,    "status_name": "ftjgqTfGHkVnpLasqXLuDQxNR",    "created_time": 0,    "updated_time": 3,    "device_name": "kuxtivhDVQGIAJiQGeCofFqpZ",    "device_ip": "xLfHdqvJWEvWTTILwhUQiFCjj",    "device_status": 11,    "device_status_name": "qSoEBjVDrjFMhgcWfpQoZfHJD"}
+{    "id": "lQjFlHKdaSkWBccBagRelVKAL",    "dn": "hBqDZmRivofvrsykoUQbHxUnj",    "title": "LhXYpCusVVALOfXMtbiBIbpDd",    "device_id": "rblcWXIttojhhLxcHIJvbLFoo",    "content": "rcuLrVVbDPRGMyFZUunDlCuln",    "picstr": "reEUWwBroiHhZmupkmTJEyGSu",    "level": 57,    "level_name": "grcJugSTmqrsZDPgXBsOeTJOZ",    "status": 80,    "status_name": "YEMDawamRGqgplvxIjdxnKfml",    "created_time": 67,    "updated_time": 84,    "device_name": "thDlAqjTgcdraSnOxZfAWtniH",    "device_ip": "drkxMIoJaUBgGNmRWhvHjRQOY",    "device_status": 41,    "device_status_name": "RkcYxobqWvlkxlpQsCrToenTL"}
 
 
 Comments
