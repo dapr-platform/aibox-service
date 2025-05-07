@@ -4,7 +4,7 @@ SELECT 'up SQL query';
 
 -- 设备表
 CREATE TABLE o_aibox_device (
-    id VARCHAR(32) NOT NULL,
+    id VARCHAR(36) NOT NULL,
     created_by VARCHAR(32) NOT NULL,
     created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(32) NOT NULL,
@@ -27,14 +27,14 @@ COMMENT ON COLUMN o_aibox_device.status IS '设备状态(0:离线，1:在线)';
 
 -- 事件表
 CREATE TABLE o_aibox_event (
-    id VARCHAR(32) NOT NULL,
+    id VARCHAR(36) NOT NULL,
     created_by VARCHAR(32) NOT NULL,
     created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(32) NOT NULL,
     updated_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     dn VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
-    device_id VARCHAR(32) NOT NULL,
+    device_id VARCHAR(36) NOT NULL,
     content TEXT,
     picstr TEXT,
     level INTEGER NOT NULL DEFAULT 4,

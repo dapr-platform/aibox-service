@@ -12,11 +12,11 @@ import (
 
 const (
 	// 设备离线阈值，超过此时间未收到心跳则标记为离线
-	DeviceOfflineThreshold = 5 * time.Minute
+	DeviceOfflineThreshold = 3 * time.Minute
 )
 
 // InitDeviceService 初始化设备服务
-func InitDeviceService() {
+func init() {
 	common.Logger.Info("初始化设备服务...")
 	go startDeviceMonitor()
 	common.Logger.Info("设备服务初始化完成")
@@ -54,7 +54,7 @@ func checkOfflineDevices() {
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_deviceTableInfo.Name,
-		"status = 1", // 只查询在线设备
+		"status=1", // 只查询在线设备
 	)
 
 	if err != nil {
@@ -78,7 +78,7 @@ func checkOfflineDevices() {
 			// 更新设备状态为离线
 			device.Status = 0 // 离线
 			device.UpdatedTime = common.LocalTime(now)
-			device.UpdatedBy = "system"
+			device.UpdatedBy = "admin"
 
 			err := common.DbUpsert[model.Aibox_device](
 				context.Background(),
@@ -109,7 +109,7 @@ func GetDeviceStatus(deviceId string) (string, error) {
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_deviceTableInfo.Name,
-		fmt.Sprintf("id='%s'", deviceId),
+		fmt.Sprintf("id=%s", deviceId),
 	)
 
 	if err != nil {

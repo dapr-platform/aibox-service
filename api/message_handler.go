@@ -33,7 +33,7 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		common.Logger.Errorf("读取请求体失败: %v", err)
-		http.Error(w, "读取请求失败", http.StatusBadRequest)
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
 	defer r.Body.Close()
@@ -42,7 +42,7 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	var baseMsg entity.BaseMessage
 	if err := json.Unmarshal(body, &baseMsg); err != nil {
 		common.Logger.Errorf("解析基础消息失败: %v", err)
-		http.Error(w, "无法解析消息格式", http.StatusBadRequest)
+		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 		return
 	}
 
@@ -53,7 +53,7 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 		var heartbeatMsg entity.HeartbeatMessage
 		if err := json.Unmarshal(body, &heartbeatMsg); err != nil {
 			common.Logger.Errorf("解析心跳消息失败: %v", err)
-			http.Error(w, "解析心跳消息失败", http.StatusBadRequest)
+			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 			return
 		}
 		message = &heartbeatMsg
@@ -62,14 +62,14 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 		var eventMsg entity.EventMessage
 		if err := json.Unmarshal(body, &eventMsg); err != nil {
 			common.Logger.Errorf("解析事件消息失败: %v", err)
-			http.Error(w, "解析事件消息失败", http.StatusBadRequest)
+			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 			return
 		}
 		message = &eventMsg
 
 	default:
 		common.Logger.Warnf("未知消息类型: %s", baseMsg.Type)
-		http.Error(w, "未知消息类型", http.StatusBadRequest)
+		common.HttpResult(w, common.ErrService.AppendMsg("未知消息类型"))
 		return
 	}
 
@@ -83,11 +83,5 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 			"status": "success",
 		},
 	}
-
-	// 返回响应
-	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(response); err != nil {
-		common.Logger.Errorf("返回响应失败: %v", err)
-		http.Error(w, "返回响应失败", http.StatusInternalServerError)
-	}
+	common.HttpResult(w, common.OK.WithData(response))
 }
