@@ -24,6 +24,8 @@ type HeartbeatMessage struct {
 	ID        string `json:"id"`
 	Time      string `json:"time"`
 	BoxID     string `json:"box_id"`
+	IP        string `json:"ip"`
+	BoxName   string `json:"box_name"`
 	BuildTime string `json:"build_time"`
 }
 
@@ -36,6 +38,7 @@ type EventMessage struct {
 	EventLevel   string `json:"event_level"`
 	EventMessage string `json:"event_message"`
 	EventPicture string `json:"event_picture"`
+	Status       string `json:"status"`
 }
 
 type ResponseMessage struct {

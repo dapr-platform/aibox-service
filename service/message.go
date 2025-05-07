@@ -9,6 +9,7 @@ import (
 	"aibox-service/model"
 
 	"github.com/dapr-platform/common"
+	"github.com/spf13/cast"
 )
 
 // ProcessMessage 处理收到的消息
@@ -40,11 +41,11 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_deviceTableInfo.Name,
-		"id='"+message.BoxID+"'",
+		"id="+message.BoxID,
 	)
 
 	// 解析心跳时间
-	heartbeatTime, err := time.Parse(time.RFC3339, message.Time)
+	heartbeatTime, err := time.Parse("2006-01-02 15:04:05", message.Time)
 	if err != nil {
 		heartbeatTime = time.Now()
 		common.Logger.Warnf("解析心跳时间失败: %v, 使用当前时间", err)
@@ -55,12 +56,12 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 		common.Logger.Infof("创建新设备: ID=%s", message.BoxID)
 		newDevice := model.Aibox_device{
 			ID:                  message.BoxID,
-			CreatedBy:           "system",
+			CreatedBy:           "admin",
 			CreatedTime:         common.LocalTime(time.Now()),
-			UpdatedBy:           "system",
+			UpdatedBy:           "admin",
 			UpdatedTime:         common.LocalTime(time.Now()),
-			Name:                "AI盒子-" + message.BoxID,
-			IP:                  "", // 需要后续更新
+			Name:                message.BoxName,
+			IP:                  message.IP,
 			BuildTimeStr:        message.BuildTime,
 			LatestHeartBeatTime: common.LocalTime(heartbeatTime),
 			Status:              1, // 在线
@@ -82,8 +83,9 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 		device.LatestHeartBeatTime = common.LocalTime(heartbeatTime)
 		device.BuildTimeStr = message.BuildTime
 		device.Status = 1 // 设置为在线
+		device.IP = message.IP
 		device.UpdatedTime = common.LocalTime(time.Now())
-		device.UpdatedBy = "system"
+		device.UpdatedBy = "admin"
 
 		err = common.DbUpsert[model.Aibox_device](
 			context.Background(),
@@ -108,7 +110,7 @@ func processEventMessage(message *entity.EventMessage) {
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_deviceTableInfo.Name,
-		"id='"+message.BoxID+"'",
+		"id="+message.BoxID,
 	)
 
 	if device == nil {
@@ -116,12 +118,12 @@ func processEventMessage(message *entity.EventMessage) {
 		// 创建设备记录
 		newDevice := model.Aibox_device{
 			ID:                  message.BoxID,
-			CreatedBy:           "system",
+			CreatedBy:           "admin",
 			CreatedTime:         common.LocalTime(time.Now()),
-			UpdatedBy:           "system",
+			UpdatedBy:           "admin",
 			UpdatedTime:         common.LocalTime(time.Now()),
-			Name:                "AI盒子-" + message.BoxID,
-			IP:                  "", // 需要后续更新
+			Name:                "",
+			IP:                  "",
 			BuildTimeStr:        "",
 			LatestHeartBeatTime: common.LocalTime(time.Now()),
 			Status:              1, // 在线
@@ -144,26 +146,61 @@ func processEventMessage(message *entity.EventMessage) {
 	levelInt := parseEventLevel(message.EventLevel)
 
 	// 解析事件时间
-	eventTime, err := time.Parse(time.RFC3339, message.Time)
+	eventTime, err := time.Parse("2006-01-02 15:04:05", message.Time)
 	if err != nil {
 		eventTime = time.Now()
 		common.Logger.Warnf("解析事件时间失败: %v, 使用当前时间", err)
+	}
+	dn := message.BoxID + "-" + message.EventType
+	existEvent, err := common.DbGetOne[model.Aibox_event](
+		context.Background(),
+		common.GetDaprClient(),
+		model.Aibox_eventTableInfo.Name,
+		"dn="+dn,
+	)
+	if err != nil {	
+		common.Logger.Errorf("获取事件记录失败: %v", err)
+		return
+	}
+	if existEvent != nil {
+		common.Logger.Infof("事件记录已存在: %s", dn)
+		existEvent.UpdatedTime = common.LocalTime(eventTime)
+		existEvent.UpdatedBy = "admin"
+		existEvent.Status = cast.ToInt32(message.Status)
+		existEvent.Content = message.EventMessage
+		existEvent.Picstr = message.EventPicture
+		existEvent.Level = int32(levelInt)
+		existEvent.Title = formatEventTitle(message.EventType, message.EventLevel)
+		err = common.DbUpsert[model.Aibox_event](
+			context.Background(),
+			common.GetDaprClient(),
+			*existEvent,
+			model.Aibox_eventTableInfo.Name,
+			"id",
+		)
+		if err != nil {
+			common.Logger.Errorf("更新事件记录失败: %v", err)
+		} else {
+			common.Logger.Infof("成功更新事件: ID=%s, 级别=%d, 设备=%s",
+				existEvent.ID, existEvent.Level, existEvent.DeviceID)
+		}
+		return
 	}
 
 	// 创建事件记录
 	event := model.Aibox_event{
 		ID:          message.ID,
-		CreatedBy:   "system",
+		CreatedBy:   "admin",
 		CreatedTime: common.LocalTime(eventTime),
-		UpdatedBy:   "system",
+		UpdatedBy:   "admin",
 		UpdatedTime: common.LocalTime(eventTime),
-		Dn:          message.BoxID,
+		Dn:          message.BoxID + "-" + message.EventType,
 		Title:       formatEventTitle(message.EventType, message.EventLevel),
 		DeviceID:    message.BoxID,
 		Content:     message.EventMessage,
 		Picstr:      message.EventPicture,
 		Level:       int32(levelInt),
-		Status:      1, // 活动
+		Status:      cast.ToInt32(message.Status), 
 	}
 
 	err = common.DbUpsert[model.Aibox_event](
