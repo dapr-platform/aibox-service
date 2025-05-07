@@ -16,6 +16,16 @@ func InitMessageRoute(r chi.Router) {
 	r.Post(common.BASE_CONTEXT+"/message", ProcessMessageHandler)
 }
 
+// @Summary 处理消息
+// @Description 处理消息
+// @Tags 消息
+// @Accept json
+// @Produce json
+// @Param message body entity.BaseMessage true "消息"
+// @Success 200 {object} entity.ResponseMessage "成功"
+// @Failure 400 {object} entity.ResponseMessage "失败"
+// @Failure 500 {object} entity.ResponseMessage "失败"
+// @Router /message [post]
 func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	common.Logger.Debug("收到消息请求")
 

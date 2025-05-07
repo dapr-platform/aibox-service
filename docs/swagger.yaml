@@ -18,6 +18,19 @@ definitions:
       status:
         type: integer
     type: object
+  entity.BaseMessage:
+    properties:
+      type:
+        type: string
+    type: object
+  entity.ResponseMessage:
+    properties:
+      action:
+        type: string
+      data:
+        additionalProperties: true
+        type: object
+    type: object
   model.Aibox_active_event_stats:
     properties:
       event_count:
@@ -1242,4 +1255,34 @@ paths:
       summary: page query
       tags:
       - AI盒子事件
+  /message:
+    post:
+      consumes:
+      - application/json
+      description: 处理消息
+      parameters:
+      - description: 消息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/entity.BaseMessage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+        "500":
+          description: 失败
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+      summary: 处理消息
+      tags:
+      - 消息
 swagger: "2.0"
