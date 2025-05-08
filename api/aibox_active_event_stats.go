@@ -6,8 +6,6 @@ import (
 	"github.com/go-chi/chi/v5"
 	"net/http"
 
-	"strings"
-
 	"time"
 )
 
@@ -18,63 +16,6 @@ func InitAibox_active_event_statsRoute(r chi.Router) {
 	r.Get(common.BASE_CONTEXT+"/aibox-active-event-stats/page", Aibox_active_event_statsPageListHandler)
 	r.Get(common.BASE_CONTEXT+"/aibox-active-event-stats", Aibox_active_event_statsListHandler)
 
-	r.Post(common.BASE_CONTEXT+"/aibox-active-event-stats", UpsertAibox_active_event_statsHandler)
-
-	r.Delete(common.BASE_CONTEXT+"/aibox-active-event-stats/{id}", DeleteAibox_active_event_statsHandler)
-
-	r.Post(common.BASE_CONTEXT+"/aibox-active-event-stats/batch-delete", batchDeleteAibox_active_event_statsHandler)
-
-	r.Post(common.BASE_CONTEXT+"/aibox-active-event-stats/batch-upsert", batchUpsertAibox_active_event_statsHandler)
-
-}
-
-// @Summary batch update
-// @Description batch update
-// @Tags AI盒子活动事件统计视图
-// @Accept  json
-// @Param entities body []map[string]any true "objects array"
-// @Produce  json
-// @Success 200 {object} common.Response ""
-// @Failure 500 {object} common.Response ""
-// @Router /aibox-active-event-stats/batch-upsert [post]
-func batchUpsertAibox_active_event_statsHandler(w http.ResponseWriter, r *http.Request) {
-
-	var entities []model.Aibox_active_event_stats
-	err := common.ReadRequestBody(r, &entities)
-	if err != nil {
-		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
-		return
-	}
-	if len(entities) == 0 {
-		common.HttpResult(w, common.ErrParam.AppendMsg("len of entities is 0"))
-		return
-	}
-
-	beforeHook, exists := common.GetUpsertBeforeHook("Aibox_active_event_stats")
-	if exists {
-		for _, v := range entities {
-			_, err1 := beforeHook(r, v)
-			if err1 != nil {
-				common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
-				return
-			}
-		}
-
-	}
-	for _, v := range entities {
-		if v.ID == "" {
-			v.ID = common.NanoId()
-		}
-
-	}
-
-	err = common.DbBatchUpsert[model.Aibox_active_event_stats](r.Context(), common.GetDaprClient(), entities, model.Aibox_active_event_statsTableInfo.Name, model.Aibox_active_event_stats_FIELD_NAME_id)
-	if err != nil {
-		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
-		return
-	}
-
-	common.HttpResult(w, common.OK)
 }
 
 // @Summary page query
@@ -116,102 +57,4 @@ func Aibox_active_event_statsPageListHandler(w http.ResponseWriter, r *http.Requ
 // @Router /aibox-active-event-stats [get]
 func Aibox_active_event_statsListHandler(w http.ResponseWriter, r *http.Request) {
 	common.CommonQuery[model.Aibox_active_event_stats](w, r, common.GetDaprClient(), "v_aibox_active_event_stats", "level")
-}
-
-// @Summary save
-// @Description save
-// @Tags AI盒子活动事件统计视图
-// @Accept       json
-// @Param item body model.Aibox_active_event_stats true "object"
-// @Produce  json
-// @Success 200 {object} common.Response{data=model.Aibox_active_event_stats} "object"
-// @Failure 500 {object} common.Response ""
-// @Router /aibox-active-event-stats [post]
-func UpsertAibox_active_event_statsHandler(w http.ResponseWriter, r *http.Request) {
-	var val model.Aibox_active_event_stats
-	err := common.ReadRequestBody(r, &val)
-	if err != nil {
-		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
-		return
-	}
-
-	beforeHook, exists := common.GetUpsertBeforeHook("Aibox_active_event_stats")
-	if exists {
-		v, err1 := beforeHook(r, val)
-		if err1 != nil {
-			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
-			return
-		}
-		val = v.(model.Aibox_active_event_stats)
-	}
-	if val.ID == "" {
-		val.ID = common.NanoId()
-	}
-
-	err = common.DbUpsert[model.Aibox_active_event_stats](r.Context(), common.GetDaprClient(), val, model.Aibox_active_event_statsTableInfo.Name, "id")
-	if err != nil {
-		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
-		return
-	}
-	common.HttpSuccess(w, common.OK.WithData(val))
-}
-
-// @Summary delete
-// @Description delete
-// @Tags AI盒子活动事件统计视图
-// @Param level  path string true "实例id"
-// @Produce  json
-// @Success 200 {object} common.Response{data=model.Aibox_active_event_stats} "object"
-// @Failure 500 {object} common.Response ""
-// @Router /aibox-active-event-stats/{id} [delete]
-func DeleteAibox_active_event_statsHandler(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
-	beforeHook, exists := common.GetDeleteBeforeHook("Aibox_active_event_stats")
-	if exists {
-		_, err1 := beforeHook(r, id)
-		if err1 != nil {
-			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
-			return
-		}
-	}
-	common.CommonDelete(w, r, common.GetDaprClient(), "v_aibox_active_event_stats", "level", "id")
-}
-
-// @Summary batch delete
-// @Description batch delete
-// @Tags AI盒子活动事件统计视图
-// @Accept  json
-// @Param ids body []string true "id array"
-// @Produce  json
-// @Success 200 {object} common.Response ""
-// @Failure 500 {object} common.Response ""
-// @Router /aibox-active-event-stats/batch-delete [post]
-func batchDeleteAibox_active_event_statsHandler(w http.ResponseWriter, r *http.Request) {
-
-	var ids []string
-	err := common.ReadRequestBody(r, &ids)
-	if err != nil {
-		common.HttpResult(w, common.ErrParam.AppendMsg(err.Error()))
-		return
-	}
-	if len(ids) == 0 {
-		common.HttpResult(w, common.ErrParam.AppendMsg("len of ids is 0"))
-		return
-	}
-	beforeHook, exists := common.GetBatchDeleteBeforeHook("Aibox_active_event_stats")
-	if exists {
-		_, err1 := beforeHook(r, ids)
-		if err1 != nil {
-			common.HttpResult(w, common.ErrService.AppendMsg(err1.Error()))
-			return
-		}
-	}
-	idstr := strings.Join(ids, ",")
-	err = common.DbDeleteByOps(r.Context(), common.GetDaprClient(), "v_aibox_active_event_stats", []string{"id"}, []string{"in"}, []any{idstr})
-	if err != nil {
-		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
-		return
-	}
-
-	common.HttpResult(w, common.OK)
 }
