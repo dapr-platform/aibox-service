@@ -8,4 +8,6 @@ func InitRoute(r chi.Router) {
 	InitAibox_event_infoRoute(r)
 	InitAibox_device_infoRoute(r)
 	InitMessageRoute(r)
+	InitAibox_updateRoute(r)
+	InitAibox_update_infoRoute(r)
 }

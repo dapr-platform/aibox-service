@@ -18,7 +18,7 @@ DB Table Details
 
 
 Table: v_aibox_device_info
-[ 0] id                                             VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 0] id                                             VARCHAR(36)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 36      default: []
 [ 1] name                                           VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 2] ip                                             VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 3] build_time_str                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
@@ -34,7 +34,7 @@ Table: v_aibox_device_info
 
 JSON Sample
 -------------------------------------
-{    "id": "RRrEpeRquDGHZqXNnhEdLRfmp",    "name": "nPdpKCfMEcUGAXKqPlEChmKtr",    "ip": "tSlRgProQlWreZFcEhvcIkqGu",    "build_time_str": "aNLbkRIGxHuDPyjHfgdKJvRhQ",    "latest_heart_beat_time": 83,    "status": 81,    "status_name": "qWuVeXAffrVfphGsbECrXYWYi",    "active_event_count": 55,    "critical_event_count": 98,    "major_event_count": 16,    "minor_event_count": 15,    "warning_event_count": 15}
+{    "id": "MWndQmBHyIPvvGRbQGgMvrTma",    "name": "hhnggtRvpdCxoxtSTAsQFlULk",    "ip": "CtUsscCkbDLODwLrUyiLEUPZI",    "build_time_str": "cWATySaKWADAFuSZVFIltUDyw",    "latest_heart_beat_time": 50,    "status": 30,    "status_name": "JHqEFdKsWDbrMivgGESFwhsCi",    "active_event_count": 16,    "critical_event_count": 78,    "major_event_count": 80,    "minor_event_count": 17,    "warning_event_count": 99}
 
 
 Comments
@@ -114,12 +114,12 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 `,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
+			DatabaseTypePretty: "VARCHAR(36)",
 			IsPrimaryKey:       true,
 			IsAutoIncrement:    false,
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
+			ColumnLength:       36,
 			GoFieldName:        "ID",
 			GoFieldType:        "string",
 			JSONFieldName:      "id",

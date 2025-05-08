@@ -18,14 +18,14 @@ DB Table Details
 
 
 Table: o_aibox_event
-[ 0] id                                             VARCHAR(32)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 0] id                                             VARCHAR(36)          null: false  primary: true   isArray: false  auto: false  col: VARCHAR         len: 36      default: []
 [ 1] created_by                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 2] created_time                                   TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: [CURRENT_TIMESTAMP]
 [ 3] updated_by                                     VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 4] updated_time                                   TIMESTAMP            null: false  primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: [CURRENT_TIMESTAMP]
 [ 5] dn                                             VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 6] title                                          VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 7] device_id                                      VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 7] device_id                                      VARCHAR(36)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 36      default: []
 [ 8] content                                        TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 9] picstr                                         TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [10] level                                          INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [4]
@@ -34,7 +34,7 @@ Table: o_aibox_event
 
 JSON Sample
 -------------------------------------
-{    "id": "bgFGYnInTCYOdortlrkSnnxGZ",    "created_by": "qievnuQxWdIRLfqexsWeMEYPi",    "created_time": 37,    "updated_by": "xnDOvJiecKVNDuvlQbDAHYVCu",    "updated_time": 64,    "dn": "gLRHQSmHtiqcCmEyiAxqslkqW",    "title": "IoWSvInGOZVvVKvpeRvFZmbLd",    "device_id": "fYvGUXPuUvWGeAQrojIpWvBls",    "content": "pSgcJHoOGiofOYucxYtmBrHgk",    "picstr": "ngMkptSbnMWtHTijdntWCTtck",    "level": 84,    "status": 8}
+{    "id": "YMXITxmrrFfDoFXRbvHJAtHif",    "created_by": "FRpGbuIUOJKCNjNwHRAeOgBVx",    "created_time": 4,    "updated_by": "dLmcpkAlsQqyQthvyDRhfbxAl",    "updated_time": 88,    "dn": "ZVjgaGcooVuQgGfgUafKBCprf",    "title": "byRbJxVCnATPAnyKRmmsowbij",    "device_id": "iPyprQsOiKdZvaWJiHBonLFFS",    "content": "YBijlFcqmcSRtcGZVXTAsvQAI",    "picstr": "sAQyJAOhxTmIvSMedGaocKvtr",    "level": 85,    "status": 17}
 
 
 
@@ -105,12 +105,12 @@ var Aibox_eventTableInfo = &TableInfo{
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
+			DatabaseTypePretty: "VARCHAR(36)",
 			IsPrimaryKey:       true,
 			IsAutoIncrement:    false,
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
+			ColumnLength:       36,
 			GoFieldName:        "ID",
 			GoFieldType:        "string",
 			JSONFieldName:      "id",
@@ -252,12 +252,12 @@ var Aibox_eventTableInfo = &TableInfo{
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
+			DatabaseTypePretty: "VARCHAR(36)",
 			IsPrimaryKey:       false,
 			IsAutoIncrement:    false,
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
+			ColumnLength:       36,
 			GoFieldName:        "DeviceID",
 			GoFieldType:        "string",
 			JSONFieldName:      "device_id",

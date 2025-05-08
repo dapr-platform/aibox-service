@@ -79,6 +79,143 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子活动事件统计视图"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Aibox_active_event_stats"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_active_event_stats"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-active-event-stats/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子活动事件统计视图"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-active-event-stats/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子活动事件统计视图"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
             }
         },
         "/aibox-active-event-stats/page": {
@@ -159,6 +296,53 @@
                                                     }
                                                 }
                                             ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-active-event-stats/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子活动事件统计视图"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "level",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_active_event_stats"
                                         }
                                     }
                                 }
@@ -464,6 +648,143 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子设备信息视图"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Aibox_device_info"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_device_info"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-device-info/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子设备信息视图"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-device-info/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子设备信息视图"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
             }
         },
         "/aibox-device-info/page": {
@@ -598,6 +919,53 @@
                                                     }
                                                 }
                                             ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-device-info/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子设备信息视图"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_device_info"
                                         }
                                     }
                                 }
@@ -1208,6 +1576,143 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子事件详情视图"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Aibox_event_info"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_event_info"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-event-info/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子事件详情视图"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-event-info/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子事件详情视图"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
             }
         },
         "/aibox-event-info/page": {
@@ -1366,6 +1871,53 @@
                                                     }
                                                 }
                                             ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-event-info/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子事件详情视图"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_event_info"
                                         }
                                     }
                                 }
@@ -1647,6 +2199,898 @@
                                     "properties": {
                                         "data": {
                                             "$ref": "#/definitions/model.Aibox_event"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_by",
+                        "name": "created_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_time",
+                        "name": "created_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_by",
+                        "name": "updated_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_time",
+                        "name": "updated_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "version",
+                        "name": "version",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_path",
+                        "name": "file_path",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_name",
+                        "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "description",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Aibox_update"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Aibox_update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_update"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update-info": {
+            "get": {
+                "description": "query objects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "query objects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "version",
+                        "name": "version",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type_name",
+                        "name": "type_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_path",
+                        "name": "file_path",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_name",
+                        "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "description",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status_name",
+                        "name": "status_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_time",
+                        "name": "created_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_time",
+                        "name": "updated_time",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.Aibox_update_info"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "save",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "save",
+                "parameters": [
+                    {
+                        "description": "object",
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Aibox_update_info"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_update_info"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update-info/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update-info/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update-info/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "version",
+                        "name": "version",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type_name",
+                        "name": "type_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_path",
+                        "name": "file_path",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_name",
+                        "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "description",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status_name",
+                        "name": "status_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_time",
+                        "name": "created_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_time",
+                        "name": "updated_time",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Aibox_update_info"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update-info/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新信息视图"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_update_info"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update/batch-delete": {
+            "post": {
+                "description": "batch delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "batch delete",
+                "parameters": [
+                    {
+                        "description": "id array",
+                        "name": "ids",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update/batch-upsert": {
+            "post": {
+                "description": "batch update",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "batch update",
+                "parameters": [
+                    {
+                        "description": "objects array",
+                        "name": "entities",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update/page": {
+            "get": {
+                "description": "page query, _page(from 1 begin), _page_size, _order, and others fields, status=1, name=$like.%CAM%",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "page query",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "current page",
+                        "name": "_page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size",
+                        "name": "_page_size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "order",
+                        "name": "_order",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_by",
+                        "name": "created_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "created_time",
+                        "name": "created_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_by",
+                        "name": "updated_by",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updated_time",
+                        "name": "updated_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "version",
+                        "name": "version",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "type",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_path",
+                        "name": "file_path",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_name",
+                        "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "description",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "status",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "objects array",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/definitions/common.Page"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/definitions/model.Aibox_update"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/common.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/aibox-update/{id}": {
+            "delete": {
+                "description": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AI盒子软件更新"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "实例id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/common.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Aibox_update"
                                         }
                                     }
                                 }
@@ -1990,6 +3434,104 @@
                 },
                 "updated_time": {
                     "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Aibox_update": {
+            "type": "object",
+            "properties": {
+                "created_by": {
+                    "description": "created_by",
+                    "type": "string"
+                },
+                "created_time": {
+                    "description": "created_time",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "更新描述",
+                    "type": "string"
+                },
+                "file_name": {
+                    "description": "文件名",
+                    "type": "string"
+                },
+                "file_path": {
+                    "description": "文件存放路径",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "更新ID(version+type的md5)",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态(0:禁用, 1:启用)",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "更新类型(1:应用, 2:模型, 3:配置, 4:其他)",
+                    "type": "integer"
+                },
+                "updated_by": {
+                    "description": "updated_by",
+                    "type": "string"
+                },
+                "updated_time": {
+                    "description": "updated_time",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "版本号",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Aibox_update_info": {
+            "type": "object",
+            "properties": {
+                "created_time": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "更新描述",
+                    "type": "string"
+                },
+                "file_name": {
+                    "description": "文件名",
+                    "type": "string"
+                },
+                "file_path": {
+                    "description": "文件存放路径",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "更新ID",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态",
+                    "type": "integer"
+                },
+                "status_name": {
+                    "description": "状态名称",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "更新类型",
+                    "type": "integer"
+                },
+                "type_name": {
+                    "description": "更新类型名称",
+                    "type": "string"
+                },
+                "updated_time": {
+                    "description": "更新时间",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "版本号",
                     "type": "string"
                 }
             }

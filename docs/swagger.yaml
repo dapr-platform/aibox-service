@@ -205,6 +205,78 @@ definitions:
         description: 更新时间
         type: string
     type: object
+  model.Aibox_update:
+    properties:
+      created_by:
+        description: created_by
+        type: string
+      created_time:
+        description: created_time
+        type: string
+      description:
+        description: 更新描述
+        type: string
+      file_name:
+        description: 文件名
+        type: string
+      file_path:
+        description: 文件存放路径
+        type: string
+      id:
+        description: 更新ID(version+type的md5)
+        type: string
+      status:
+        description: 状态(0:禁用, 1:启用)
+        type: integer
+      type:
+        description: 更新类型(1:应用, 2:模型, 3:配置, 4:其他)
+        type: integer
+      updated_by:
+        description: updated_by
+        type: string
+      updated_time:
+        description: updated_time
+        type: string
+      version:
+        description: 版本号
+        type: string
+    type: object
+  model.Aibox_update_info:
+    properties:
+      created_time:
+        description: 创建时间
+        type: string
+      description:
+        description: 更新描述
+        type: string
+      file_name:
+        description: 文件名
+        type: string
+      file_path:
+        description: 文件存放路径
+        type: string
+      id:
+        description: 更新ID
+        type: string
+      status:
+        description: 状态
+        type: integer
+      status_name:
+        description: 状态名称
+        type: string
+      type:
+        description: 更新类型
+        type: integer
+      type_name:
+        description: 更新类型名称
+        type: string
+      updated_time:
+        description: 更新时间
+        type: string
+      version:
+        description: 版本号
+        type: string
+    type: object
 info:
   contact: {}
   description: aibox-service API
@@ -254,6 +326,121 @@ paths:
           schema:
             $ref: '#/definitions/common.Response'
       summary: query objects
+      tags:
+      - AI盒子活动事件统计视图
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_active_event_stats'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_active_event_stats'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子活动事件统计视图
+  /aibox-active-event-stats/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: level
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_active_event_stats'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子活动事件统计视图
+  /aibox-active-event-stats/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子活动事件统计视图
+  /aibox-active-event-stats/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
       tags:
       - AI盒子活动事件统计视图
   /aibox-active-event-stats/page:
@@ -495,6 +682,121 @@ paths:
           schema:
             $ref: '#/definitions/common.Response'
       summary: query objects
+      tags:
+      - AI盒子设备信息视图
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_device_info'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_device_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子设备信息视图
+  /aibox-device-info/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_device_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子设备信息视图
+  /aibox-device-info/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子设备信息视图
+  /aibox-device-info/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
       tags:
       - AI盒子设备信息视图
   /aibox-device-info/page:
@@ -968,6 +1270,121 @@ paths:
       summary: query objects
       tags:
       - AI盒子事件详情视图
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_event_info'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_event_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子事件详情视图
+  /aibox-event-info/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_event_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子事件详情视图
+  /aibox-event-info/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子事件详情视图
+  /aibox-event-info/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - AI盒子事件详情视图
   /aibox-event-info/page:
     get:
       description: page query, _page(from 1 begin), _page_size, _order, and others
@@ -1255,6 +1672,568 @@ paths:
       summary: page query
       tags:
       - AI盒子事件
+  /aibox-update:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: version
+        in: query
+        name: version
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: file_path
+        in: query
+        name: file_path
+        type: string
+      - description: file_name
+        in: query
+        name: file_name
+        type: string
+      - description: description
+        in: query
+        name: description
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_update'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子软件更新
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_update'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_update'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子软件更新
+  /aibox-update-info:
+    get:
+      description: query objects
+      parameters:
+      - description: _select
+        in: query
+        name: _select
+        type: string
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: version
+        in: query
+        name: version
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: type_name
+        in: query
+        name: type_name
+        type: string
+      - description: file_path
+        in: query
+        name: file_path
+        type: string
+      - description: file_name
+        in: query
+        name: file_name
+        type: string
+      - description: description
+        in: query
+        name: description
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.Aibox_update_info'
+                  type: array
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: query objects
+      tags:
+      - AI盒子软件更新信息视图
+    post:
+      consumes:
+      - application/json
+      description: save
+      parameters:
+      - description: object
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/model.Aibox_update_info'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_update_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: save
+      tags:
+      - AI盒子软件更新信息视图
+  /aibox-update-info/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_update_info'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子软件更新信息视图
+  /aibox-update-info/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子软件更新信息视图
+  /aibox-update-info/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - AI盒子软件更新信息视图
+  /aibox-update-info/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: version
+        in: query
+        name: version
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: type_name
+        in: query
+        name: type_name
+        type: string
+      - description: file_path
+        in: query
+        name: file_path
+        type: string
+      - description: file_name
+        in: query
+        name: file_name
+        type: string
+      - description: description
+        in: query
+        name: description
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      - description: status_name
+        in: query
+        name: status_name
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_update_info'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子软件更新信息视图
+  /aibox-update/{id}:
+    delete:
+      description: delete
+      parameters:
+      - description: 实例id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: object
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.Aibox_update'
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: delete
+      tags:
+      - AI盒子软件更新
+  /aibox-update/batch-delete:
+    post:
+      consumes:
+      - application/json
+      description: batch delete
+      parameters:
+      - description: id array
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch delete
+      tags:
+      - AI盒子软件更新
+  /aibox-update/batch-upsert:
+    post:
+      consumes:
+      - application/json
+      description: batch update
+      parameters:
+      - description: objects array
+        in: body
+        name: entities
+        required: true
+        schema:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: batch update
+      tags:
+      - AI盒子软件更新
+  /aibox-update/page:
+    get:
+      description: page query, _page(from 1 begin), _page_size, _order, and others
+        fields, status=1, name=$like.%CAM%
+      parameters:
+      - description: current page
+        in: query
+        name: _page
+        required: true
+        type: integer
+      - description: page size
+        in: query
+        name: _page_size
+        required: true
+        type: integer
+      - description: order
+        in: query
+        name: _order
+        type: string
+      - description: id
+        in: query
+        name: id
+        type: string
+      - description: created_by
+        in: query
+        name: created_by
+        type: string
+      - description: created_time
+        in: query
+        name: created_time
+        type: string
+      - description: updated_by
+        in: query
+        name: updated_by
+        type: string
+      - description: updated_time
+        in: query
+        name: updated_time
+        type: string
+      - description: version
+        in: query
+        name: version
+        type: string
+      - description: type
+        in: query
+        name: type
+        type: string
+      - description: file_path
+        in: query
+        name: file_path
+        type: string
+      - description: file_name
+        in: query
+        name: file_name
+        type: string
+      - description: description
+        in: query
+        name: description
+        type: string
+      - description: status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: objects array
+          schema:
+            allOf:
+            - $ref: '#/definitions/common.Response'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/common.Page'
+                  - properties:
+                      items:
+                        items:
+                          $ref: '#/definitions/model.Aibox_update'
+                        type: array
+                    type: object
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/common.Response'
+      summary: page query
+      tags:
+      - AI盒子软件更新
   /message:
     post:
       consumes:

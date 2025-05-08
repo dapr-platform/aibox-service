@@ -18,10 +18,10 @@ DB Table Details
 
 
 Table: v_aibox_event_info
-[ 0] id                                             VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 0] id                                             VARCHAR(36)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 36      default: []
 [ 1] dn                                             VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 2] title                                          VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 3] device_id                                      VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 3] device_id                                      VARCHAR(36)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 36      default: []
 [ 4] content                                        TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 5] picstr                                         TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 6] level                                          INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
@@ -38,7 +38,7 @@ Table: v_aibox_event_info
 
 JSON Sample
 -------------------------------------
-{    "id": "lQjFlHKdaSkWBccBagRelVKAL",    "dn": "hBqDZmRivofvrsykoUQbHxUnj",    "title": "LhXYpCusVVALOfXMtbiBIbpDd",    "device_id": "rblcWXIttojhhLxcHIJvbLFoo",    "content": "rcuLrVVbDPRGMyFZUunDlCuln",    "picstr": "reEUWwBroiHhZmupkmTJEyGSu",    "level": 57,    "level_name": "grcJugSTmqrsZDPgXBsOeTJOZ",    "status": 80,    "status_name": "YEMDawamRGqgplvxIjdxnKfml",    "created_time": 67,    "updated_time": 84,    "device_name": "thDlAqjTgcdraSnOxZfAWtniH",    "device_ip": "drkxMIoJaUBgGNmRWhvHjRQOY",    "device_status": 41,    "device_status_name": "RkcYxobqWvlkxlpQsCrToenTL"}
+{    "id": "XbnyNTstylSamTomgPwrCaZyQ",    "dn": "phXeZyhGJyDOoAtkMRXLlouFk",    "title": "sCraBgFEtRnhMUuOBCOvYhKiU",    "device_id": "qfmcKigeZCUACuDtsLuWGHuJa",    "content": "tXEeWjZfKanuDKeZTLErToFjD",    "picstr": "VHgvyoPIKBnHcruoPiraXTdWE",    "level": 29,    "level_name": "yOLlRHGCealHYjVSTuCdcIyRn",    "status": 4,    "status_name": "mQeOahXEkcPBEdwOnidJxRjax",    "created_time": 26,    "updated_time": 18,    "device_name": "rXgiJxZkcgeptNgRSaDDZeIjf",    "device_ip": "YhIBXNnWBOBCnAQiKGAKSodxL",    "device_status": 92,    "device_status_name": "yXpHWNidurGxUqRHtMcVJDYCK"}
 
 
 Comments
@@ -134,12 +134,12 @@ Warning table: v_aibox_event_info primary key column id is nullable column, sett
 `,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
+			DatabaseTypePretty: "VARCHAR(36)",
 			IsPrimaryKey:       true,
 			IsAutoIncrement:    false,
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
+			ColumnLength:       36,
 			GoFieldName:        "ID",
 			GoFieldType:        "string",
 			JSONFieldName:      "id",
@@ -197,12 +197,12 @@ Warning table: v_aibox_event_info primary key column id is nullable column, sett
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
-			DatabaseTypePretty: "VARCHAR(32)",
+			DatabaseTypePretty: "VARCHAR(36)",
 			IsPrimaryKey:       false,
 			IsAutoIncrement:    false,
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
-			ColumnLength:       32,
+			ColumnLength:       36,
 			GoFieldName:        "DeviceID",
 			GoFieldType:        "string",
 			JSONFieldName:      "device_id",
