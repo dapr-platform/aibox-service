@@ -1,6 +1,8 @@
 package api
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net/http"
@@ -68,15 +70,23 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer dst.Close()
 
+	// 计算MD5
+	hash := md5.New()
+	tee := io.TeeReader(file, hash)
+
 	// 复制文件内容
-	_, err = io.Copy(dst, file)
+	_, err = io.Copy(dst, tee)
 	if err != nil {
 		common.HttpResult(w, common.ErrService.AppendMsg("保存文件失败: "+err.Error()))
 		return
 	}
 
+	// 获取MD5值
+	md5sum := hex.EncodeToString(hash.Sum(nil))
+
 	common.HttpResult(w, common.OK.AppendMsg("上传成功").WithData(map[string]string{
 		"filePath": filePath,
+		"md5":      md5sum,
 	}))
 }
 
