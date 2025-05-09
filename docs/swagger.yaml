@@ -1774,7 +1774,7 @@ paths:
       summary: page query
       tags:
       - AI盒子软件更新
-  /download:
+  /file/download:
     post:
       description: 下载文件
       parameters:
@@ -1805,37 +1805,7 @@ paths:
       summary: 下载文件
       tags:
       - 软件更新文件管理
-  /message:
-    post:
-      consumes:
-      - application/json
-      description: 处理消息
-      parameters:
-      - description: 消息
-        in: body
-        name: message
-        required: true
-        schema:
-          $ref: '#/definitions/entity.BaseMessage'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: 成功
-          schema:
-            $ref: '#/definitions/entity.ResponseMessage'
-        "400":
-          description: 失败
-          schema:
-            $ref: '#/definitions/entity.ResponseMessage'
-        "500":
-          description: 失败
-          schema:
-            $ref: '#/definitions/entity.ResponseMessage'
-      summary: 处理消息
-      tags:
-      - 消息
-  /upload:
+  /file/upload:
     post:
       consumes:
       - multipart/form-data
@@ -1868,4 +1838,34 @@ paths:
       summary: 上传文件
       tags:
       - 软件更新文件管理
+  /message:
+    post:
+      consumes:
+      - application/json
+      description: 处理消息
+      parameters:
+      - description: 消息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/entity.BaseMessage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+        "400":
+          description: 失败
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+        "500":
+          description: 失败
+          schema:
+            $ref: '#/definitions/entity.ResponseMessage'
+      summary: 处理消息
+      tags:
+      - 消息
 swagger: "2.0"

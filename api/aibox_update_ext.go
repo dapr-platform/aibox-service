@@ -15,8 +15,8 @@ import (
 )
 
 func InitAiboxUpdateExtRoute(r chi.Router) {
-	r.Post(common.BASE_CONTEXT+"/upload", uploadHandler)
-	r.Post(common.BASE_CONTEXT+"/download", downloadHandler)
+	r.Post(common.BASE_CONTEXT+"/file/upload", uploadHandler)
+	r.Post(common.BASE_CONTEXT+"/file/download", downloadHandler)
 }
 
 // @Summary 上传文件
@@ -28,7 +28,7 @@ func InitAiboxUpdateExtRoute(r chi.Router) {
 // @Param file formData file true "文件"
 // @Success 200 {string} string "上传成功"
 // @Failure 400 {string} string "上传失败"
-// @Router /upload [post]
+// @Router /file/upload [post]
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	// 解析表单
 	err := r.ParseMultipartForm(100 << 20) // 100MB 限制
@@ -98,7 +98,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 // @Param filename query string true "文件名"
 // @Success 200 {string} string "下载成功"
 // @Failure 400 {string} string "下载失败"
-// @Router /download [post]
+// @Router /file/download [post]
 func downloadHandler(w http.ResponseWriter, r *http.Request) {
 	// 解析表单
 	err := r.ParseForm()
