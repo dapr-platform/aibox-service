@@ -1774,6 +1774,37 @@ paths:
       summary: page query
       tags:
       - AI盒子软件更新
+  /download:
+    post:
+      description: 下载文件
+      parameters:
+      - description: 版本号
+        in: formData
+        name: version
+        required: true
+        type: string
+      - description: 类型
+        in: formData
+        name: type
+        required: true
+        type: string
+      - description: 文件名
+        in: query
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: 下载成功
+          schema:
+            type: string
+        "400":
+          description: 下载失败
+          schema:
+            type: string
+      summary: 下载文件
+      tags:
+      - 软件更新文件管理
   /message:
     post:
       consumes:
@@ -1804,4 +1835,37 @@ paths:
       summary: 处理消息
       tags:
       - 消息
+  /upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传文件
+      parameters:
+      - description: 版本号
+        in: formData
+        name: version
+        required: true
+        type: string
+      - description: 类型
+        in: formData
+        name: type
+        required: true
+        type: string
+      - description: 文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      responses:
+        "200":
+          description: 上传成功
+          schema:
+            type: string
+        "400":
+          description: 上传失败
+          schema:
+            type: string
+      summary: 上传文件
+      tags:
+      - 软件更新文件管理
 swagger: "2.0"

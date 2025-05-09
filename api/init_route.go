@@ -10,4 +10,5 @@ func InitRoute(r chi.Router) {
 	InitMessageRoute(r)
 	InitAibox_updateRoute(r)
 	InitAibox_update_infoRoute(r)
+	InitAiboxUpdateExtRoute(r)
 }
