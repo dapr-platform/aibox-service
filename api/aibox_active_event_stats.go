@@ -28,7 +28,7 @@ func InitAibox_active_event_statsRoute(r chi.Router) {
 // @Param level_name query string false "level_name"
 // @Param event_count query string false "event_count"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_active_event_stats}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_active_event_stats]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-active-event-stats/page [get]
 func Aibox_active_event_statsPageListHandler(w http.ResponseWriter, r *http.Request) {

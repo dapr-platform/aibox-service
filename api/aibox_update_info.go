@@ -37,7 +37,7 @@ func InitAibox_update_infoRoute(r chi.Router) {
 // @Param created_time query string false "created_time"
 // @Param updated_time query string false "updated_time"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_update_info}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_update_info]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-update-info/page [get]
 func Aibox_update_infoPageListHandler(w http.ResponseWriter, r *http.Request) {

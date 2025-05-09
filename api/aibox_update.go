@@ -104,7 +104,7 @@ func batchUpsertAibox_updateHandler(w http.ResponseWriter, r *http.Request) {
 // @Param description query string false "description"
 // @Param status query string false "status"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_update}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_update]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-update/page [get]
 func Aibox_updatePageListHandler(w http.ResponseWriter, r *http.Request) {

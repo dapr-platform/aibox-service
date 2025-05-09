@@ -106,7 +106,7 @@ func batchUpsertAibox_deviceHandler(w http.ResponseWriter, r *http.Request) {
 // @Param latest_heart_beat_time query string false "latest_heart_beat_time"
 // @Param status query string false "status"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_device}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_device]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-device/page [get]
 func Aibox_devicePageListHandler(w http.ResponseWriter, r *http.Request) {

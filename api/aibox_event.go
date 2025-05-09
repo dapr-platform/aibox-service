@@ -104,7 +104,7 @@ func batchUpsertAibox_eventHandler(w http.ResponseWriter, r *http.Request) {
 // @Param level query string false "level"
 // @Param status query string false "status"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_event}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_event]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-event/page [get]
 func Aibox_eventPageListHandler(w http.ResponseWriter, r *http.Request) {

@@ -37,7 +37,7 @@ func InitAibox_device_infoRoute(r chi.Router) {
 // @Param minor_event_count query string false "minor_event_count"
 // @Param warning_event_count query string false "warning_event_count"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_device_info}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_device_info]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-device-info/page [get]
 func Aibox_device_infoPageListHandler(w http.ResponseWriter, r *http.Request) {

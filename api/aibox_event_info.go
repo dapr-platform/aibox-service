@@ -41,7 +41,7 @@ func InitAibox_event_infoRoute(r chi.Router) {
 // @Param device_status query string false "device_status"
 // @Param device_status_name query string false "device_status_name"
 // @Produce  json
-// @Success 200 {object} common.Response{data=common.Page{items=[]model.Aibox_event_info}} "objects array"
+// @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_event_info]} "objects array"
 // @Failure 500 {object} common.Response ""
 // @Router /aibox-event-info/page [get]
 func Aibox_event_infoPageListHandler(w http.ResponseWriter, r *http.Request) {

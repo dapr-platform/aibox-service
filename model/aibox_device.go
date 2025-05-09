@@ -32,7 +32,7 @@ Table: o_aibox_device
 
 JSON Sample
 -------------------------------------
-{    "id": "XgrElNnwNuRrvFGpGnbfRxyif",    "created_by": "mnAvJaQCEejaFxFmbGeRFMmqn",    "created_time": 40,    "updated_by": "YAtqavlpWJpxpVcsKgQKgNCEd",    "updated_time": 22,    "name": "eQpSKakHgGQRaslaCwvXOCqOq",    "ip": "XnJyhIxLwiZpMoZUmCkqqmREd",    "build_time_str": "SSNCSxpiiualclVNwtKnJyBPC",    "latest_heart_beat_time": 18,    "status": 62}
+{    "id": "CnKTAvdsAlZlicCxrWYSJvmTs",    "created_by": "LdaImRmRBjFfgfNWjdnkIQsGR",    "created_time": 78,    "updated_by": "oOSymjneTkGueQPiIbKToGZIM",    "updated_time": 60,    "name": "XwduQIPbNCCNGeItsuUNQIyXY",    "ip": "mCMfZigsGkAaLrwrXbBXhuVVi",    "build_time_str": "XTmaSLyUiWXeNXpbaOwAhyQyT",    "latest_heart_beat_time": 20,    "status": 34}
 
 
 

@@ -1,8 +1,89 @@
 basePath: /swagger/aibox-service
 definitions:
-  common.Page:
+  common.PageGeneric-model_Aibox_active_event_stats:
     properties:
-      items: {}
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_active_event_stats'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_device:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_device'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_device_info:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_device_info'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_event:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_event'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_event_info:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_event_info'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_update:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_update'
+        type: array
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  common.PageGeneric-model_Aibox_update_info:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/model.Aibox_update_info'
+        type: array
       page:
         type: integer
       page_size:
@@ -375,14 +456,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_active_event_stats'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_active_event_stats'
               type: object
         "500":
           description: Internal Server Error
@@ -652,14 +726,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_device_info'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_device_info'
               type: object
         "500":
           description: Internal Server Error
@@ -822,14 +889,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_device'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_device'
               type: object
         "500":
           description: Internal Server Error
@@ -1139,14 +1199,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_event_info'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_event_info'
               type: object
         "500":
           description: Internal Server Error
@@ -1317,14 +1370,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_event'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_event'
               type: object
         "500":
           description: Internal Server Error
@@ -1602,14 +1648,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_update_info'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_update_info'
               type: object
         "500":
           description: Internal Server Error
@@ -1780,14 +1819,7 @@ paths:
             - $ref: '#/definitions/common.Response'
             - properties:
                 data:
-                  allOf:
-                  - $ref: '#/definitions/common.Page'
-                  - properties:
-                      items:
-                        items:
-                          $ref: '#/definitions/model.Aibox_update'
-                        type: array
-                    type: object
+                  $ref: '#/definitions/common.PageGeneric-model_Aibox_update'
               type: object
         "500":
           description: Internal Server Error
