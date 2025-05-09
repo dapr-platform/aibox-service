@@ -100,6 +100,7 @@ func batchUpsertAibox_updateHandler(w http.ResponseWriter, r *http.Request) {
 // @Param type query string false "type"
 // @Param file_path query string false "file_path"
 // @Param file_name query string false "file_name"
+// @Param file_md5 query string false "file_md5"
 // @Param description query string false "description"
 // @Param status query string false "status"
 // @Produce  json
@@ -132,6 +133,7 @@ func Aibox_updatePageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param type query string false "type"
 // @Param file_path query string false "file_path"
 // @Param file_name query string false "file_name"
+// @Param file_md5 query string false "file_md5"
 // @Param description query string false "description"
 // @Param status query string false "status"
 // @Produce  json

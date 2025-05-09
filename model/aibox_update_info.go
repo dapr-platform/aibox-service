@@ -24,16 +24,17 @@ Table: v_aibox_update_info
 [ 3] type_name                                      TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 4] file_path                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 5] file_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 6] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
-[ 7] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
-[ 8] status_name                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
-[ 9] created_time                                   TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[10] updated_time                                   TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[ 6] file_md5                                       VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 7] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
+[ 8] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
+[ 9] status_name                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
+[10] created_time                                   TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[11] updated_time                                   TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "wodBMkTnblesFHZfxFHUOgAay",    "version": "BencVjKQAtuFTvegbbefkGfok",    "type": 56,    "type_name": "dnGneTwfgNVlIWaJZsNGjXTZX",    "file_path": "xWuxyQFghVWZaNpYkHanomIcl",    "file_name": "xZImOyYxylirjsbFlrjXIhObY",    "description": "bZlcrJfOFtlkNMQmUQlVKJARJ",    "status": 15,    "status_name": "ghmvYHDqeILcuMLSdKLBUwDuJ",    "created_time": 66,    "updated_time": 63}
+{    "id": "sPGhnpGoYErOKpvnMnpLTLScg",    "version": "UFrIKXfZsLXmRDUMrxlHkytKW",    "type": 80,    "type_name": "jTPeUyOTpVhNaGZTuIRJeKsNv",    "file_path": "dmQxvEJiKFBbVsuLPauZlTkCG",    "file_name": "eVcoPMPkKxGYYMBkKtQmdvNhe",    "file_md_5": "wcJPiQTWeioYCFtKwsLYvvjpm",    "description": "HTxFiGwJWIutAjgTZBwMMNhPe",    "status": 85,    "status_name": "uawXBWvxOpYiDLHjgFhDpLHHP",    "created_time": 63,    "updated_time": 38}
 
 
 Comments
@@ -59,6 +60,8 @@ var (
 
 	Aibox_update_info_FIELD_NAME_file_name = "file_name"
 
+	Aibox_update_info_FIELD_NAME_file_md5 = "file_md5"
+
 	Aibox_update_info_FIELD_NAME_description = "description"
 
 	Aibox_update_info_FIELD_NAME_status = "status"
@@ -83,6 +86,8 @@ type Aibox_update_info struct {
 	FilePath string `json:"file_path"` //文件存放路径
 
 	FileName string `json:"file_name"` //文件名
+
+	FileMd5 string `json:"file_md_5"` //文件MD5值
 
 	Description string `json:"description"` //更新描述
 
@@ -230,6 +235,27 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 
 		&ColumnInfo{
 			Index:              6,
+			Name:               "file_md5",
+			Comment:            `文件MD5值`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "FileMd5",
+			GoFieldType:        "string",
+			JSONFieldName:      "file_md_5",
+			ProtobufFieldName:  "file_md_5",
+			ProtobufType:       "string",
+			ProtobufPos:        7,
+		},
+
+		&ColumnInfo{
+			Index:              7,
 			Name:               "description",
 			Comment:            `更新描述`,
 			Notes:              ``,
@@ -246,11 +272,11 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			JSONFieldName:      "description",
 			ProtobufFieldName:  "description",
 			ProtobufType:       "string",
-			ProtobufPos:        7,
+			ProtobufPos:        8,
 		},
 
 		&ColumnInfo{
-			Index:              7,
+			Index:              8,
 			Name:               "status",
 			Comment:            `状态`,
 			Notes:              ``,
@@ -267,11 +293,11 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        8,
+			ProtobufPos:        9,
 		},
 
 		&ColumnInfo{
-			Index:              8,
+			Index:              9,
 			Name:               "status_name",
 			Comment:            `状态名称`,
 			Notes:              ``,
@@ -288,11 +314,11 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			JSONFieldName:      "status_name",
 			ProtobufFieldName:  "status_name",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "created_time",
 			Comment:            `创建时间`,
 			Notes:              ``,
@@ -309,11 +335,11 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			JSONFieldName:      "created_time",
 			ProtobufFieldName:  "created_time",
 			ProtobufType:       "uint64",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "updated_time",
 			Comment:            `更新时间`,
 			Notes:              ``,
@@ -330,7 +356,7 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			JSONFieldName:      "updated_time",
 			ProtobufFieldName:  "updated_time",
 			ProtobufType:       "uint64",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 	},
 }

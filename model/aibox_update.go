@@ -27,13 +27,14 @@ Table: o_aibox_update
 [ 6] type                                           INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 7] file_path                                      VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 8] file_name                                      VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 9] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
-[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [1]
+[ 9] file_md5                                       VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[10] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
+[11] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [1]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "jRfpevprGynCjkduntLpLhxZe",    "created_by": "YeqkvkOSbWXeSAeoinKHQBGxR",    "created_time": 22,    "updated_by": "qXnnXWiSyYOYDuXaxEAlJxSIe",    "updated_time": 1,    "version": "WPftcmCqBfjmNHperowYYBbLe",    "type": 53,    "file_path": "fKEsxPiHrLtMmYeoQcUobnrEV",    "file_name": "aJQQCkTtaCXwJmGsodfDFMFCq",    "description": "PRmrNwpqlOZwUXfXCQIOEpTPo",    "status": 0}
+{    "id": "DWregEhmcpaTqJfWaHyUTkryC",    "created_by": "XQMTsIeZlOPBusNYVSakAXaBX",    "created_time": 23,    "updated_by": "ZYutIkvqNaTcHXyuBOvHpqPKL",    "updated_time": 5,    "version": "XxVduMlLFLaqBhpFfeMxwYAaI",    "type": 31,    "file_path": "vTPpTFlPaQfaGEspvXrMexMXJ",    "file_name": "SEJvrDUZEeCJFSGJOGhbmcKfo",    "file_md_5": "nwjjahijBlGWcLFopbNLAdAjd",    "description": "yNgBXGVqtstAAoxPfmhsfwYMy",    "status": 44}
 
 
 
@@ -57,6 +58,8 @@ var (
 	Aibox_update_FIELD_NAME_file_path = "file_path"
 
 	Aibox_update_FIELD_NAME_file_name = "file_name"
+
+	Aibox_update_FIELD_NAME_file_md5 = "file_md5"
 
 	Aibox_update_FIELD_NAME_description = "description"
 
@@ -82,6 +85,8 @@ type Aibox_update struct {
 	FilePath string `json:"file_path"` //文件存放路径
 
 	FileName string `json:"file_name"` //文件名
+
+	FileMd5 string `json:"file_md_5"` //文件MD5值
 
 	Description string `json:"description"` //更新描述
 
@@ -284,6 +289,27 @@ var Aibox_updateTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              9,
+			Name:               "file_md5",
+			Comment:            `文件MD5值`,
+			Notes:              ``,
+			Nullable:           false,
+			DatabaseTypeName:   "VARCHAR",
+			DatabaseTypePretty: "VARCHAR(32)",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "VARCHAR",
+			ColumnLength:       32,
+			GoFieldName:        "FileMd5",
+			GoFieldType:        "string",
+			JSONFieldName:      "file_md_5",
+			ProtobufFieldName:  "file_md_5",
+			ProtobufType:       "string",
+			ProtobufPos:        10,
+		},
+
+		&ColumnInfo{
+			Index:              10,
 			Name:               "description",
 			Comment:            `更新描述`,
 			Notes:              ``,
@@ -300,11 +326,11 @@ var Aibox_updateTableInfo = &TableInfo{
 			JSONFieldName:      "description",
 			ProtobufFieldName:  "description",
 			ProtobufType:       "string",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "status",
 			Comment:            `状态(0:禁用, 1:启用)`,
 			Notes:              ``,
@@ -321,7 +347,7 @@ var Aibox_updateTableInfo = &TableInfo{
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 	},
 }

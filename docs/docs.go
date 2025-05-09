@@ -1748,6 +1748,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "file_md5",
+                        "name": "file_md5",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "description",
                         "name": "description",
                         "in": "query"
@@ -1901,6 +1907,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "file_md5",
+                        "name": "file_md5",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "description",
                         "name": "description",
                         "in": "query"
@@ -2026,6 +2038,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "file_name",
                         "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_md5",
+                        "name": "file_md5",
                         "in": "query"
                     },
                     {
@@ -2272,6 +2290,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "file_name",
                         "name": "file_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "file_md5",
+                        "name": "file_md5",
                         "in": "query"
                     },
                     {
@@ -2819,6 +2843,10 @@ const docTemplate = `{
                     "description": "更新描述",
                     "type": "string"
                 },
+                "file_md_5": {
+                    "description": "文件MD5值",
+                    "type": "string"
+                },
                 "file_name": {
                     "description": "文件名",
                     "type": "string"
@@ -2862,6 +2890,10 @@ const docTemplate = `{
                 },
                 "description": {
                     "description": "更新描述",
+                    "type": "string"
+                },
+                "file_md_5": {
+                    "description": "文件MD5值",
                     "type": "string"
                 },
                 "file_name": {

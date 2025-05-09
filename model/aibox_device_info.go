@@ -34,7 +34,7 @@ Table: v_aibox_device_info
 
 JSON Sample
 -------------------------------------
-{    "id": "rxNOMoogpqEJUoNuLhjdouhvq",    "name": "tNbgpROSZxWFPHDoYNTOXGVhC",    "ip": "LMFyobRllshMcEBFOGwechGkK",    "build_time_str": "UCmFgsOwfDGyQquecgBsHHQpA",    "latest_heart_beat_time": 75,    "status": 81,    "status_name": "dLTlrdfMiCPpeajaQDLyVDwlr",    "active_event_count": 71,    "critical_event_count": 26,    "major_event_count": 35,    "minor_event_count": 35,    "warning_event_count": 56}
+{    "id": "tJFjBVBycpWaNKHbcDZKwPYVI",    "name": "aGqYHJfYcOPwLZaMVNDKhrsTY",    "ip": "UOvtvpHetTKCFvZCojyOmHUxe",    "build_time_str": "dHwilNmlZwWnSBwgXUrgLkwaW",    "latest_heart_beat_time": 76,    "status": 56,    "status_name": "WfIcCYmcDMIYEJgBlcZDXiWuw",    "active_event_count": 11,    "critical_event_count": 65,    "major_event_count": 47,    "minor_event_count": 4,    "warning_event_count": 74}
 
 
 Comments
