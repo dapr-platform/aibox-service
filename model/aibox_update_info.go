@@ -24,7 +24,7 @@ Table: v_aibox_update_info
 [ 3] type_name                                      TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 4] file_path                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 5] file_name                                      VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 6] file_md5                                       VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 6] file_key                                       VARCHAR(32)          null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [ 7] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [ 8] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 9] status_name                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
@@ -34,7 +34,7 @@ Table: v_aibox_update_info
 
 JSON Sample
 -------------------------------------
-{    "id": "nvjZmdkeUWPuDcNeafEWaMmBi",    "version": "pWbceWDpQdKcLpLqtFfxfIXkr",    "type": 35,    "type_name": "OKtdIBIqZRvgsWZaqtKpxCeCG",    "file_path": "HIoIuQjhjMnjKtrpocvUCICkf",    "file_name": "oYZcsiUfpnGDXuEgMCLGwaPmD",    "file_md_5": "MrtaujFOrNQyEbDnwrLmVVUBI",    "description": "JIkoJToQoaTXerHCvIfGGovTU",    "status": 58,    "status_name": "PAnFPpytljcuRdFbRcAfpdGWO",    "created_time": 11,    "updated_time": 2}
+{    "id": "eXZBHhsJuAnOVFGUVcYRcvBoi",    "version": "mVPTxWlXTyUxQGELyRfHkqxgs",    "type": 31,    "type_name": "qDlDbbgaOJBKcXWMiaWogDJhS",    "file_path": "nrXruxlhnZgrmBbYXCveQXAqJ",    "file_name": "NaGGJNDpAhgKAfHXxRUwuaJCW",    "file_key": "aPLPWtUZJxpTCBRSCvouWxdlA",    "description": "ruAkpQtLuYTZsWRHcgwaWadgN",    "status": 33,    "status_name": "SsAlVtRYdbPHbVaaWtiOwWeWC",    "created_time": 86,    "updated_time": 11}
 
 
 Comments
@@ -60,7 +60,7 @@ var (
 
 	Aibox_update_info_FIELD_NAME_file_name = "file_name"
 
-	Aibox_update_info_FIELD_NAME_file_md5 = "file_md5"
+	Aibox_update_info_FIELD_NAME_file_key = "file_key"
 
 	Aibox_update_info_FIELD_NAME_description = "description"
 
@@ -87,7 +87,7 @@ type Aibox_update_info struct {
 
 	FileName string `json:"file_name"` //文件名
 
-	FileMd5 string `json:"file_md_5"` //文件MD5值
+	FileKey string `json:"file_key"` //文件key
 
 	Description string `json:"description"` //更新描述
 
@@ -235,8 +235,8 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 
 		&ColumnInfo{
 			Index:              6,
-			Name:               "file_md5",
-			Comment:            `文件MD5值`,
+			Name:               "file_key",
+			Comment:            `文件key`,
 			Notes:              ``,
 			Nullable:           true,
 			DatabaseTypeName:   "VARCHAR",
@@ -246,10 +246,10 @@ Warning table: v_aibox_update_info primary key column id is nullable column, set
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
 			ColumnLength:       32,
-			GoFieldName:        "FileMd5",
+			GoFieldName:        "FileKey",
 			GoFieldType:        "string",
-			JSONFieldName:      "file_md_5",
-			ProtobufFieldName:  "file_md_5",
+			JSONFieldName:      "file_key",
+			ProtobufFieldName:  "file_key",
 			ProtobufType:       "string",
 			ProtobufPos:        7,
 		},

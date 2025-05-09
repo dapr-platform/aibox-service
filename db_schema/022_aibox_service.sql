@@ -13,7 +13,7 @@ CREATE TABLE o_aibox_update (
     type INTEGER NOT NULL,
     file_path VARCHAR(255) NOT NULL,
     file_name VARCHAR(255) NOT NULL,
-    file_md5 VARCHAR(32) NOT NULL,
+    file_key VARCHAR(32) NOT NULL,
     description TEXT,
     status INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY (id)
@@ -25,7 +25,7 @@ COMMENT ON COLUMN o_aibox_update.version IS '版本号';
 COMMENT ON COLUMN o_aibox_update.type IS '更新类型(1:应用, 2:模型, 3:配置, 4:其他)';
 COMMENT ON COLUMN o_aibox_update.file_path IS '文件存放路径';
 COMMENT ON COLUMN o_aibox_update.file_name IS '文件名';
-COMMENT ON COLUMN o_aibox_update.file_md5 IS '文件MD5值';
+COMMENT ON COLUMN o_aibox_update.file_key IS '文件key';
 COMMENT ON COLUMN o_aibox_update.description IS '更新描述';
 COMMENT ON COLUMN o_aibox_update.status IS '状态(0:禁用, 1:启用)';
 
@@ -52,7 +52,7 @@ SELECT
     END AS type_name,
     u.file_path AS file_path,
     u.file_name AS file_name,
-    u.file_md5 AS file_md5,
+    u.file_key AS file_key,
     u.description AS description,
     u.status AS status,
     CASE u.status
@@ -72,7 +72,7 @@ COMMENT ON COLUMN v_aibox_update_info.type IS '更新类型';
 COMMENT ON COLUMN v_aibox_update_info.type_name IS '更新类型名称';
 COMMENT ON COLUMN v_aibox_update_info.file_path IS '文件存放路径';
 COMMENT ON COLUMN v_aibox_update_info.file_name IS '文件名';
-COMMENT ON COLUMN v_aibox_update_info.file_md5 IS '文件MD5值';
+COMMENT ON COLUMN v_aibox_update_info.file_key IS '文件key';
 COMMENT ON COLUMN v_aibox_update_info.description IS '更新描述';
 COMMENT ON COLUMN v_aibox_update_info.status IS '状态';
 COMMENT ON COLUMN v_aibox_update_info.status_name IS '状态名称';

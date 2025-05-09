@@ -1673,8 +1673,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "file_md5",
-                        "name": "file_md5",
+                        "description": "file_key",
+                        "name": "file_key",
                         "in": "query"
                     },
                     {
@@ -1832,8 +1832,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "file_md5",
-                        "name": "file_md5",
+                        "description": "file_key",
+                        "name": "file_key",
                         "in": "query"
                     },
                     {
@@ -1967,8 +1967,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "file_md5",
-                        "name": "file_md5",
+                        "description": "file_key",
+                        "name": "file_key",
                         "in": "query"
                     },
                     {
@@ -2204,8 +2204,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "file_md5",
-                        "name": "file_md5",
+                        "description": "file_key",
+                        "name": "file_key",
                         "in": "query"
                     },
                     {
@@ -2863,8 +2863,8 @@ const docTemplate = `{
                     "description": "更新描述",
                     "type": "string"
                 },
-                "file_md_5": {
-                    "description": "文件MD5值",
+                "file_key": {
+                    "description": "文件key",
                     "type": "string"
                 },
                 "file_name": {
@@ -2912,8 +2912,8 @@ const docTemplate = `{
                     "description": "更新描述",
                     "type": "string"
                 },
-                "file_md_5": {
-                    "description": "文件MD5值",
+                "file_key": {
+                    "description": "文件key",
                     "type": "string"
                 },
                 "file_name": {

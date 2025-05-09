@@ -27,14 +27,14 @@ Table: o_aibox_update
 [ 6] type                                           INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 7] file_path                                      VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 8] file_name                                      VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 9] file_md5                                       VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
+[ 9] file_key                                       VARCHAR(32)          null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 32      default: []
 [10] description                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 [11] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [1]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "fmuLmroHUKkbyjCaJIlCMbLLe",    "created_by": "QQSZSeYYaPvFbORIlUKjMvsXP",    "created_time": 47,    "updated_by": "UCjyaZpnDsJgdtQHiMaQPbEsW",    "updated_time": 73,    "version": "NyKSwEpCLLBXjZMwhAiBseOfe",    "type": 73,    "file_path": "DtTImupwwInUJNktRWUnhfrhu",    "file_name": "NyGquDhgGiqFMUcWWiSdHdPJg",    "file_md_5": "NxoUkpCaItQoeHNKbHfCdddGl",    "description": "joZSigNWoVpekMVnfIhAaeNfr",    "status": 98}
+{    "id": "IPUpvrHnlTMrkjcKjpOBUBBjG",    "created_by": "gOOWOTysrGyymifpuBkkwTlOB",    "created_time": 29,    "updated_by": "hUnLSmxBEEqjrORbhCiriXmsU",    "updated_time": 99,    "version": "MDKPdxgrCvgpdACnjTRKajqxq",    "type": 74,    "file_path": "QxuywkjHsUjkuYKoDJXjSRnZv",    "file_name": "IowvArGLqRiyVqyGySnxlZFsl",    "file_key": "WYACMLpoopedibPfwwZcSbegc",    "description": "JbOjoXALEpIovgfgOcpkrHymX",    "status": 33}
 
 
 
@@ -59,7 +59,7 @@ var (
 
 	Aibox_update_FIELD_NAME_file_name = "file_name"
 
-	Aibox_update_FIELD_NAME_file_md5 = "file_md5"
+	Aibox_update_FIELD_NAME_file_key = "file_key"
 
 	Aibox_update_FIELD_NAME_description = "description"
 
@@ -86,7 +86,7 @@ type Aibox_update struct {
 
 	FileName string `json:"file_name"` //文件名
 
-	FileMd5 string `json:"file_md_5"` //文件MD5值
+	FileKey string `json:"file_key"` //文件key
 
 	Description string `json:"description"` //更新描述
 
@@ -289,8 +289,8 @@ var Aibox_updateTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              9,
-			Name:               "file_md5",
-			Comment:            `文件MD5值`,
+			Name:               "file_key",
+			Comment:            `文件key`,
 			Notes:              ``,
 			Nullable:           false,
 			DatabaseTypeName:   "VARCHAR",
@@ -300,10 +300,10 @@ var Aibox_updateTableInfo = &TableInfo{
 			IsArray:            false,
 			ColumnType:         "VARCHAR",
 			ColumnLength:       32,
-			GoFieldName:        "FileMd5",
+			GoFieldName:        "FileKey",
 			GoFieldType:        "string",
-			JSONFieldName:      "file_md_5",
-			ProtobufFieldName:  "file_md_5",
+			JSONFieldName:      "file_key",
+			ProtobufFieldName:  "file_key",
 			ProtobufType:       "string",
 			ProtobufPos:        10,
 		},
