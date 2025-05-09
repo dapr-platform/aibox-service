@@ -84,6 +84,7 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 		device.BuildTimeStr = message.BuildTime
 		device.Status = 1 // 设置为在线
 		device.IP = message.IP
+		device.Name = message.BoxName
 		device.UpdatedTime = common.LocalTime(time.Now())
 		device.UpdatedBy = "admin"
 
@@ -158,7 +159,7 @@ func processEventMessage(message *entity.EventMessage) {
 		model.Aibox_eventTableInfo.Name,
 		"dn="+dn,
 	)
-	if err != nil {	
+	if err != nil {
 		common.Logger.Errorf("获取事件记录失败: %v", err)
 		return
 	}
@@ -200,7 +201,7 @@ func processEventMessage(message *entity.EventMessage) {
 		Content:     message.EventMessage,
 		Picstr:      message.EventPicture,
 		Level:       int32(levelInt),
-		Status:      cast.ToInt32(message.Status), 
+		Status:      cast.ToInt32(message.Status),
 	}
 
 	err = common.DbUpsert[model.Aibox_event](
