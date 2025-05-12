@@ -135,6 +135,9 @@ definitions:
       created_time:
         description: created_time
         type: string
+      device_time:
+        description: 设备时间
+        type: string
       id:
         description: 设备ID
         type: string
@@ -509,6 +512,10 @@ paths:
         in: query
         name: build_time_str
         type: string
+      - description: device_time
+        in: query
+        name: device_time
+        type: string
       - description: latest_heart_beat_time
         in: query
         name: latest_heart_beat_time
@@ -870,6 +877,10 @@ paths:
       - description: build_time_str
         in: query
         name: build_time_str
+        type: string
+      - description: device_time
+        in: query
+        name: device_time
         type: string
       - description: latest_heart_beat_time
         in: query

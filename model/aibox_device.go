@@ -26,13 +26,14 @@ Table: o_aibox_device
 [ 5] name                                           VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 6] ip                                             VARCHAR(255)         null: false  primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
 [ 7] build_time_str                                 VARCHAR(255)         null: true   primary: false  isArray: false  auto: false  col: VARCHAR         len: 255     default: []
-[ 8] latest_heart_beat_time                         TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
-[ 9] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[ 8] device_time                                    TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[ 9] latest_heart_beat_time                         TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
+[10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
 
 
 JSON Sample
 -------------------------------------
-{    "id": "DWRGOqRSCMXcWCpnuVhXDutCY",    "created_by": "UkARriFGyOaZdaXjkyHUSoMwq",    "created_time": 1,    "updated_by": "UFCvmwwEtFuuLWytGQaILpAPF",    "updated_time": 80,    "name": "YfbALRJQChmcpyrKRXsDuiFqQ",    "ip": "xeaCkaoaVaFIrpGPsHGIqlwjW",    "build_time_str": "KVkOcmCFgMEpDTvkQcGMveRYS",    "latest_heart_beat_time": 1,    "status": 53}
+{    "id": "YpcOAywIRKDdZkZKQFisUCriL",    "created_by": "poOKonmRmGSROXKsMlaakICeZ",    "created_time": 40,    "updated_by": "iNNuhuFtUZFosmioBJoPRZeeI",    "updated_time": 74,    "name": "HrSTyvPCiZkethsIXxPGnPXsJ",    "ip": "RtERbRxwQOmCbMJyiZnLAfaGP",    "build_time_str": "qkOkGKmyaTmKxluIywyrKUwUp",    "device_time": 20,    "latest_heart_beat_time": 27,    "status": 77}
 
 
 
@@ -54,6 +55,8 @@ var (
 	Aibox_device_FIELD_NAME_ip = "ip"
 
 	Aibox_device_FIELD_NAME_build_time_str = "build_time_str"
+
+	Aibox_device_FIELD_NAME_device_time = "device_time"
 
 	Aibox_device_FIELD_NAME_latest_heart_beat_time = "latest_heart_beat_time"
 
@@ -77,6 +80,8 @@ type Aibox_device struct {
 	IP string `json:"ip"` //设备IP地址
 
 	BuildTimeStr string `json:"build_time_str"` //设备构建时间
+
+	DeviceTime common.LocalTime `json:"device_time"` //设备时间
 
 	LatestHeartBeatTime common.LocalTime `json:"latest_heart_beat_time"` //最近心跳时间
 
@@ -258,6 +263,27 @@ var Aibox_deviceTableInfo = &TableInfo{
 
 		&ColumnInfo{
 			Index:              8,
+			Name:               "device_time",
+			Comment:            `设备时间`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "TIMESTAMP",
+			DatabaseTypePretty: "TIMESTAMP",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "TIMESTAMP",
+			ColumnLength:       -1,
+			GoFieldName:        "DeviceTime",
+			GoFieldType:        "common.LocalTime",
+			JSONFieldName:      "device_time",
+			ProtobufFieldName:  "device_time",
+			ProtobufType:       "uint64",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
 			Name:               "latest_heart_beat_time",
 			Comment:            `最近心跳时间`,
 			Notes:              ``,
@@ -274,11 +300,11 @@ var Aibox_deviceTableInfo = &TableInfo{
 			JSONFieldName:      "latest_heart_beat_time",
 			ProtobufFieldName:  "latest_heart_beat_time",
 			ProtobufType:       "uint64",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "status",
 			Comment:            `设备状态(0:离线，1:在线)`,
 			Notes:              ``,
@@ -295,7 +321,7 @@ var Aibox_deviceTableInfo = &TableInfo{
 			JSONFieldName:      "status",
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 	},
 }

@@ -239,6 +239,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "device_time",
+                        "name": "device_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "latest_heart_beat_time",
                         "name": "latest_heart_beat_time",
                         "in": "query"
@@ -754,6 +760,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "build_time_str",
                         "name": "build_time_str",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "device_time",
+                        "name": "device_time",
                         "in": "query"
                     },
                     {
@@ -2641,6 +2653,10 @@ const docTemplate = `{
                 },
                 "created_time": {
                     "description": "created_time",
+                    "type": "string"
+                },
+                "device_time": {
+                    "description": "设备时间",
                     "type": "string"
                 },
                 "id": {

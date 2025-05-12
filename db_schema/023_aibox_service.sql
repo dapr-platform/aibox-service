@@ -12,6 +12,7 @@ CREATE TABLE o_aibox_device (
     name VARCHAR(255) NOT NULL,
     ip VARCHAR(255) NOT NULL,
     build_time_str VARCHAR(255),
+    device_time TIMESTAMP,
     latest_heart_beat_time TIMESTAMP,
     status INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
@@ -22,6 +23,7 @@ COMMENT ON COLUMN o_aibox_device.id IS '设备ID';
 COMMENT ON COLUMN o_aibox_device.name IS '设备名称';
 COMMENT ON COLUMN o_aibox_device.ip IS '设备IP地址';
 COMMENT ON COLUMN o_aibox_device.build_time_str IS '设备构建时间';
+COMMENT ON COLUMN o_aibox_device.device_time IS '设备时间';
 COMMENT ON COLUMN o_aibox_device.latest_heart_beat_time IS '最近心跳时间';
 COMMENT ON COLUMN o_aibox_device.status IS '设备状态(0:离线，1:在线)';
 
@@ -66,6 +68,7 @@ SELECT
     d.name AS name,
     d.ip AS ip,
     d.build_time_str AS build_time_str,
+    d.device_time AS device_time,
     d.latest_heart_beat_time AS latest_heart_beat_time,
     d.status AS status,
     CASE d.status 
@@ -86,6 +89,7 @@ COMMENT ON COLUMN v_aibox_device_info.id IS '设备ID';
 COMMENT ON COLUMN v_aibox_device_info.name IS '设备名称';
 COMMENT ON COLUMN v_aibox_device_info.ip IS '设备IP地址';
 COMMENT ON COLUMN v_aibox_device_info.build_time_str IS '设备构建时间';
+COMMENT ON COLUMN v_aibox_device_info.device_time IS '设备时间';
 COMMENT ON COLUMN v_aibox_device_info.latest_heart_beat_time IS '最近心跳时间';
 COMMENT ON COLUMN v_aibox_device_info.status IS '设备状态(0:离线，1:在线)';
 COMMENT ON COLUMN v_aibox_device_info.status_name IS '设备状态名称';

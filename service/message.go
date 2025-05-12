@@ -63,7 +63,8 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 			Name:                message.BoxName,
 			IP:                  message.IP,
 			BuildTimeStr:        message.BuildTime,
-			LatestHeartBeatTime: common.LocalTime(heartbeatTime),
+			DeviceTime:          common.LocalTime(heartbeatTime),
+			LatestHeartBeatTime: common.LocalTime(time.Now()),
 			Status:              1, // 在线
 		}
 
@@ -80,11 +81,12 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 	} else {
 		// 更新设备心跳信息
 		common.Logger.Debugf("更新设备心跳: ID=%s", message.BoxID)
-		device.LatestHeartBeatTime = common.LocalTime(heartbeatTime)
+		device.LatestHeartBeatTime = common.LocalTime(time.Now())
 		device.BuildTimeStr = message.BuildTime
 		device.Status = 1 // 设置为在线
 		device.IP = message.IP
 		device.Name = message.BoxName
+		device.DeviceTime = common.LocalTime(heartbeatTime)
 		device.UpdatedTime = common.LocalTime(time.Now())
 		device.UpdatedBy = "admin"
 

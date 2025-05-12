@@ -74,6 +74,10 @@ func batchUpsertAibox_deviceHandler(w http.ResponseWriter, r *http.Request) {
 			v.UpdatedTime = common.LocalTime(time.Now())
 		}
 
+		if time.Time(v.DeviceTime).IsZero() {
+			v.DeviceTime = common.LocalTime(time.Now())
+		}
+
 		if time.Time(v.LatestHeartBeatTime).IsZero() {
 			v.LatestHeartBeatTime = common.LocalTime(time.Now())
 		}
@@ -103,6 +107,7 @@ func batchUpsertAibox_deviceHandler(w http.ResponseWriter, r *http.Request) {
 // @Param name query string false "name"
 // @Param ip query string false "ip"
 // @Param build_time_str query string false "build_time_str"
+// @Param device_time query string false "device_time"
 // @Param latest_heart_beat_time query string false "latest_heart_beat_time"
 // @Param status query string false "status"
 // @Produce  json
@@ -134,6 +139,7 @@ func Aibox_devicePageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param name query string false "name"
 // @Param ip query string false "ip"
 // @Param build_time_str query string false "build_time_str"
+// @Param device_time query string false "device_time"
 // @Param latest_heart_beat_time query string false "latest_heart_beat_time"
 // @Param status query string false "status"
 // @Produce  json
@@ -180,6 +186,10 @@ func UpsertAibox_deviceHandler(w http.ResponseWriter, r *http.Request) {
 
 	if time.Time(val.UpdatedTime).IsZero() {
 		val.UpdatedTime = common.LocalTime(time.Now())
+	}
+
+	if time.Time(val.DeviceTime).IsZero() {
+		val.DeviceTime = common.LocalTime(time.Now())
 	}
 
 	if time.Time(val.LatestHeartBeatTime).IsZero() {
