@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -100,7 +101,6 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 // @Failure 400 {string} string "下载失败"
 // @Router /file/download [get]
 func downloadHandler(w http.ResponseWriter, r *http.Request) {
-	
 
 	// 获取参数
 	version := r.URL.Query().Get("version")
@@ -111,6 +111,9 @@ func downloadHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("版本号、类型或文件名不能为空"))
 		return
 	}
+	version = url.QueryEscape(version)
+	typeStr = url.QueryEscape(typeStr)
+	filename = url.QueryEscape(filename)
 
 	// 构建文件路径
 	filePath := filepath.Join("uploads", typeStr, version, filename)
