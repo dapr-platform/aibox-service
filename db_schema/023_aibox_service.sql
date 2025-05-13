@@ -100,6 +100,7 @@ COMMENT ON COLUMN v_aibox_device_info.latest_heart_beat_time IS '最近心跳时
 COMMENT ON COLUMN v_aibox_device_info.status IS '设备状态(0:离线，1:在线)';
 COMMENT ON COLUMN v_aibox_device_info.status_name IS '设备状态名称';
 COMMENT ON COLUMN v_aibox_device_info.upgrade_tasks IS '升级任务';
+COMMENT ON COLUMN v_aibox_device_info.model_info IS '模型信息';
 COMMENT ON COLUMN v_aibox_device_info.active_event_count IS '活动事件总数';
 COMMENT ON COLUMN v_aibox_device_info.critical_event_count IS '紧急事件数';
 COMMENT ON COLUMN v_aibox_device_info.major_event_count IS '严重事件数';
