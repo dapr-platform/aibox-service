@@ -16,7 +16,7 @@ import (
 
 func InitAiboxUpdateExtRoute(r chi.Router) {
 	r.Post(common.BASE_CONTEXT+"/file/upload", uploadHandler)
-	r.Post(common.BASE_CONTEXT+"/file/download", downloadHandler)
+	r.Get(common.BASE_CONTEXT+"/file/download", downloadHandler)
 }
 
 // @Summary 上传文件
@@ -93,23 +93,18 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 // @Summary 下载文件
 // @Description 下载文件
 // @Tags 软件更新文件管理
-// @Param version formData string true "版本号"
-// @Param type formData string true "类型"
+// @Param version query string true "版本号"
+// @Param type query string true "类型"
 // @Param filename query string true "文件名"
 // @Success 200 {string} string "下载成功"
 // @Failure 400 {string} string "下载失败"
-// @Router /file/download [post]
+// @Router /file/download [get]
 func downloadHandler(w http.ResponseWriter, r *http.Request) {
-	// 解析表单
-	err := r.ParseForm()
-	if err != nil {
-		common.HttpResult(w, common.ErrParam.AppendMsg("解析表单失败: "+err.Error()))
-		return
-	}
+	
 
 	// 获取参数
-	version := r.FormValue("version")
-	typeStr := r.FormValue("type")
+	version := r.URL.Query().Get("version")
+	typeStr := r.URL.Query().Get("type")
 	filename := r.URL.Query().Get("filename")
 
 	if version == "" || typeStr == "" || filename == "" {

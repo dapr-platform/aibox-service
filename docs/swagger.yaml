@@ -1873,16 +1873,16 @@ paths:
       tags:
       - AI盒子软件更新
   /file/download:
-    post:
+    get:
       description: 下载文件
       parameters:
       - description: 版本号
-        in: formData
+        in: query
         name: version
         required: true
         type: string
       - description: 类型
-        in: formData
+        in: query
         name: type
         required: true
         type: string

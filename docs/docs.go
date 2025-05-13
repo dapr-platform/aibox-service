@@ -2345,7 +2345,7 @@ const docTemplate = `{
             }
         },
         "/file/download": {
-            "post": {
+            "get": {
                 "description": "下载文件",
                 "tags": [
                     "软件更新文件管理"
@@ -2356,14 +2356,14 @@ const docTemplate = `{
                         "type": "string",
                         "description": "版本号",
                         "name": "version",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
                         "description": "类型",
                         "name": "type",
-                        "in": "formData",
+                        "in": "query",
                         "required": true
                     },
                     {
