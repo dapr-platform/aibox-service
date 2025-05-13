@@ -34,7 +34,7 @@ Table: v_aibox_update_info
 
 JSON Sample
 -------------------------------------
-{    "id": "kXQeVyWpxVmGyOHKWVsAJEEXZ",    "version": "CSpSqQTUnpoafnDSwJuPRhgIx",    "type": 59,    "type_name": "kxYqNiHdKJGTYEYZNUbAtelHr",    "file_path": "VDLvDDDqqxkHFFTZMKfXabErp",    "file_name": "IgbXtqgHaBYfDdMWwFtimsrAX",    "file_key": "GGMVdAihEOdBadwfadKjCgOlL",    "description": "fooysfCnofLQdPRHdUVnVukpV",    "status": 80,    "status_name": "wuHMudRhPwtFSgJJufpdjRUKN",    "created_time": 65,    "updated_time": 26}
+{    "id": "IyRufxnoCWmPissyZisrwwtZU",    "version": "TyxBLSjJYBVUsdgrPAyHOqkrM",    "type": 58,    "type_name": "fdUFqXViGwvJaKQSPItYZhkcV",    "file_path": "ACyIvoaSqbiGdKVjyWyNMfVVJ",    "file_name": "eWTvJrcQmwFkfbPKyLSWHpxHg",    "file_key": "HPFWvItvvLbrkUIntTPZpiUJb",    "description": "llchxQHTrSjeWvjfFQGxfbZHY",    "status": 2,    "status_name": "UfnqnvBVgkvSldyiBNarAsZvO",    "created_time": 58,    "updated_time": 50}
 
 
 Comments

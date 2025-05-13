@@ -26,17 +26,18 @@ Table: v_aibox_device_info
 [ 5] latest_heart_beat_time                         TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 6] status                                         INT4                 null: true   primary: false  isArray: false  auto: false  col: INT4            len: -1      default: []
 [ 7] upgrade_tasks                                  TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
-[ 8] status_name                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
-[ 9] active_event_count                             INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
-[10] critical_event_count                           INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
-[11] major_event_count                              INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
-[12] minor_event_count                              INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
-[13] warning_event_count                            INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+[ 8] model_info                                     TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
+[ 9] status_name                                    TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
+[10] active_event_count                             INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+[11] critical_event_count                           INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+[12] major_event_count                              INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+[13] minor_event_count                              INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
+[14] warning_event_count                            INT8                 null: true   primary: false  isArray: false  auto: false  col: INT8            len: -1      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "TiQiihyeJevbDutBKIEoFurIr",    "name": "IsfcpEUmKPAhQilMXfqKsyCie",    "ip": "gKjluWTeQkduBPPdIgOXYdOqB",    "build_time_str": "wxJkgRApOGnLItTLQprEVLdYO",    "device_time": 54,    "latest_heart_beat_time": 72,    "status": 88,    "upgrade_tasks": "qNlEKrqElNVXFdEYsifBgMTAx",    "status_name": "KABuClBmAcYPwPbCTTrLSjjrA",    "active_event_count": 35,    "critical_event_count": 20,    "major_event_count": 53,    "minor_event_count": 28,    "warning_event_count": 28}
+{    "id": "BXxBhHoWEUtNMXAusICqeSAWy",    "name": "vwkjbOclvXQDnTnMRfMRtodmM",    "ip": "fhJYnNZZZeOglqcGBylKOFfaL",    "build_time_str": "eXafjoCDAoRXWXqxBJpXYXLMv",    "device_time": 37,    "latest_heart_beat_time": 88,    "status": 61,    "upgrade_tasks": "PbZEyilPQCorJQyACLDEfHPWo",    "model_info": "nLNNWdGWrNxDUEYvyFyCFsaJM",    "status_name": "fONyRadNsQYBcVMlSmfZwaUaj",    "active_event_count": 31,    "critical_event_count": 5,    "major_event_count": 25,    "minor_event_count": 34,    "warning_event_count": 95}
 
 
 Comments
@@ -65,6 +66,8 @@ var (
 	Aibox_device_info_FIELD_NAME_status = "status"
 
 	Aibox_device_info_FIELD_NAME_upgrade_tasks = "upgrade_tasks"
+
+	Aibox_device_info_FIELD_NAME_model_info = "model_info"
 
 	Aibox_device_info_FIELD_NAME_status_name = "status_name"
 
@@ -96,6 +99,8 @@ type Aibox_device_info struct {
 	Status int32 `json:"status"` //设备状态(0:离线，1:在线)
 
 	UpgradeTasks string `json:"upgrade_tasks"` //升级任务
+
+	ModelInfo string `json:"model_info"` //model_info
 
 	StatusName string `json:"status_name"` //设备状态名称
 
@@ -287,6 +292,27 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 
 		&ColumnInfo{
 			Index:              8,
+			Name:               "model_info",
+			Comment:            `model_info`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "TEXT",
+			DatabaseTypePretty: "TEXT",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "TEXT",
+			ColumnLength:       -1,
+			GoFieldName:        "ModelInfo",
+			GoFieldType:        "string",
+			JSONFieldName:      "model_info",
+			ProtobufFieldName:  "model_info",
+			ProtobufType:       "string",
+			ProtobufPos:        9,
+		},
+
+		&ColumnInfo{
+			Index:              9,
 			Name:               "status_name",
 			Comment:            `设备状态名称`,
 			Notes:              ``,
@@ -303,11 +329,11 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "status_name",
 			ProtobufFieldName:  "status_name",
 			ProtobufType:       "string",
-			ProtobufPos:        9,
+			ProtobufPos:        10,
 		},
 
 		&ColumnInfo{
-			Index:              9,
+			Index:              10,
 			Name:               "active_event_count",
 			Comment:            `活动事件总数`,
 			Notes:              ``,
@@ -324,11 +350,11 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "active_event_count",
 			ProtobufFieldName:  "active_event_count",
 			ProtobufType:       "int32",
-			ProtobufPos:        10,
+			ProtobufPos:        11,
 		},
 
 		&ColumnInfo{
-			Index:              10,
+			Index:              11,
 			Name:               "critical_event_count",
 			Comment:            `紧急事件数`,
 			Notes:              ``,
@@ -345,11 +371,11 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "critical_event_count",
 			ProtobufFieldName:  "critical_event_count",
 			ProtobufType:       "int32",
-			ProtobufPos:        11,
+			ProtobufPos:        12,
 		},
 
 		&ColumnInfo{
-			Index:              11,
+			Index:              12,
 			Name:               "major_event_count",
 			Comment:            `严重事件数`,
 			Notes:              ``,
@@ -366,11 +392,11 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "major_event_count",
 			ProtobufFieldName:  "major_event_count",
 			ProtobufType:       "int32",
-			ProtobufPos:        12,
+			ProtobufPos:        13,
 		},
 
 		&ColumnInfo{
-			Index:              12,
+			Index:              13,
 			Name:               "minor_event_count",
 			Comment:            `轻微事件数`,
 			Notes:              ``,
@@ -387,11 +413,11 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "minor_event_count",
 			ProtobufFieldName:  "minor_event_count",
 			ProtobufType:       "int32",
-			ProtobufPos:        13,
+			ProtobufPos:        14,
 		},
 
 		&ColumnInfo{
-			Index:              13,
+			Index:              14,
 			Name:               "warning_event_count",
 			Comment:            `警告事件数`,
 			Notes:              ``,
@@ -408,7 +434,7 @@ Warning table: v_aibox_device_info primary key column id is nullable column, set
 			JSONFieldName:      "warning_event_count",
 			ProtobufFieldName:  "warning_event_count",
 			ProtobufType:       "int32",
-			ProtobufPos:        14,
+			ProtobufPos:        15,
 		},
 	},
 }

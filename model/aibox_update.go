@@ -34,7 +34,7 @@ Table: o_aibox_update
 
 JSON Sample
 -------------------------------------
-{    "id": "JWRpycGPkpYnASteLpAaISgHw",    "created_by": "qRJTBfJOmOhREehQudVlqOspn",    "created_time": 86,    "updated_by": "wFlcIipQXvbYRqGkkxIwZBmJl",    "updated_time": 83,    "version": "aKignVtlYFjwBaLJVltqtjIUM",    "type": 7,    "file_path": "lgvRAMZRchqdEjSXUQynDAjJM",    "file_name": "osFQltndBpxYaeNmkMSdQSlIM",    "file_key": "qEWKbIIevdyiMWbACmQMxNEBY",    "description": "iqvdrwLHRDpFkqSRjHuGpxcmF",    "status": 85}
+{    "id": "vrWWDUkFfmQjQnQnlMyKbUOuG",    "created_by": "dLXnxibwGcdrRRgeyFiZSSBWi",    "created_time": 95,    "updated_by": "FaSnlfJgZiXxLDlqHSgQhxOUJ",    "updated_time": 67,    "version": "fRwAbOpROrXYWQWbUaMQiUPec",    "type": 42,    "file_path": "tENswIcWmMsgLKpNJqDOrvusn",    "file_name": "PwEVDhfItkXCZcfctLfjfjkFI",    "file_key": "DATjmshApdcxFsccaDWyPFHXK",    "description": "hjRQDSIkcOMsodeeBHxpQVmcy",    "status": 6}
 
 
 

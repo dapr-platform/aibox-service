@@ -25,7 +25,7 @@ Table: v_aibox_active_event_stats
 
 JSON Sample
 -------------------------------------
-{    "level": 80,    "level_name": "kZKRJfBJFhpImXpFYtCawOuPf",    "event_count": 65}
+{    "level": 16,    "level_name": "lYBHrICjTKEypYKyJVYkSMkQR",    "event_count": 99}
 
 
 Comments

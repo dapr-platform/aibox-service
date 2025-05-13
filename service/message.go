@@ -31,14 +31,12 @@ func ProcessHeartbeatMessage(message *entity.HeartbeatMessage) (upgradeTask *ent
 		return nil, fmt.Errorf("处理设备信息失败: %v", err)
 	}
 
-	
-
 	if config.AUTO_UPGRADE {
 		err = handleDeviceUpgrade(device, message)
 		if err != nil {
 			common.Logger.Errorf("处理设备升级失败: %v", err)
 			// 继续执行，不中断心跳流程
-		} 
+		}
 	}
 
 	// 获取现有升级任务
@@ -48,7 +46,7 @@ func ProcessHeartbeatMessage(message *entity.HeartbeatMessage) (upgradeTask *ent
 		// 继续执行，不影响心跳基本功能
 		err = nil // 重置错误，避免整个心跳处理失败
 	}
-	
+
 	if updateErr := updateDeviceStatus(device); updateErr != nil {
 		common.Logger.Errorf("更新设备状态失败: %v", updateErr)
 		// 如果没有其他错误，返回此错误
@@ -143,6 +141,7 @@ func updateDeviceInfo(device *model.Aibox_device, message *entity.HeartbeatMessa
 	device.DeviceTime = common.LocalTime(heartbeatTime)
 	device.UpdatedTime = common.LocalTime(time.Now())
 	device.UpdatedBy = "admin"
+	device.ModelInfo = message.ModelInfo
 }
 
 // handleDeviceUpgrade 处理设备升级,如果有需要升级的，就加入到设备的任务列表
@@ -153,57 +152,57 @@ func handleDeviceUpgrade(device *model.Aibox_device, message *entity.HeartbeatMe
 		downloadURL := buildDownloadURL(message.IP, upgradeInfo)
 		return addUpgradeTask(device, upgradeInfo, downloadURL)
 	}
-	upgradeInfo,hasModelUpdate := checkDeviceHasModelUpdate(message.ModelInfo)
-	if hasModelUpdate{
+	upgradeInfo, hasModelUpdate := checkDeviceHasModelUpdate(message.ModelInfo)
+	if hasModelUpdate {
 		downloadURL := buildDownloadURL(message.IP, upgradeInfo)
 		return addUpgradeTask(device, upgradeInfo, downloadURL)
 	}
 	return nil
 }
 
-func checkDeviceHasModelUpdate(modelInfoStr string)(upgradeInfo *model.Aibox_update_info,hasModelUpdate bool){
-	if modelInfoStr == ""{
-		return nil,false
+func checkDeviceHasModelUpdate(modelInfoStr string) (upgradeInfo *model.Aibox_update_info, hasModelUpdate bool) {
+	if modelInfoStr == "" {
+		return nil, false
 	}
-	for _,modelInfo := range strings.Split(modelInfoStr,","){
+	for _, modelInfo := range strings.Split(modelInfoStr, ",") {
 		modelInfo = strings.TrimSpace(modelInfo)
-		if modelInfo == ""{
+		if modelInfo == "" {
 			continue
 		}
-		modelInfoArray := strings.Split(modelInfo,":")
-		if len(modelInfoArray) != 2{
+		modelInfoArray := strings.Split(modelInfo, ":")
+		if len(modelInfoArray) != 2 {
 			common.Logger.Warnf("模型信息格式错误: %s", modelInfo)
 			continue
 		}
 		modelName := modelInfoArray[0]
 		modelVersion := modelInfoArray[1]
-		upgradeInfo,err := getLatestModelUpdateInfo(modelName)
-		if err != nil{
-			common.Logger.Warnf("获取模型更新信息失败: %v",err)
+		upgradeInfo, err := getLatestModelUpdateInfo(modelName)
+		if err != nil {
+			common.Logger.Warnf("获取模型更新信息失败: %v", err)
 			continue
 		}
-		if upgradeInfo.Version != modelVersion{
-			return upgradeInfo,true
+		if upgradeInfo.Version != modelVersion {
+			return upgradeInfo, true
 		}
 	}
 
-	return nil,false
+	return nil, false
 }
-func getLatestModelUpdateInfo(modelName string)(upgradeInfo *model.Aibox_update_info,err error){
-	updates,err :=common.DbQuery[model.Aibox_update_info](
+func getLatestModelUpdateInfo(modelName string) (upgradeInfo *model.Aibox_update_info, err error) {
+	updates, err := common.DbQuery[model.Aibox_update_info](
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_update_infoTableInfo.Name,
 		"type=2&status=1&_order=-updated_time&filename="+modelName,
 	)
-	if err != nil{
-		return nil,fmt.Errorf("获取模型更新信息失败: %v",err)
+	if err != nil {
+		return nil, fmt.Errorf("获取模型更新信息失败: %v", err)
 	}
-	if len(updates) == 0{
-		return nil,fmt.Errorf("没有找到可用的模型更新信息")
+	if len(updates) == 0 {
+		return nil, fmt.Errorf("没有找到可用的模型更新信息")
 	}
 	latestUpdate := updates[0]
-	return &latestUpdate,nil
+	return &latestUpdate, nil
 }
 
 // buildDownloadURL 构建下载URL

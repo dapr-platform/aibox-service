@@ -111,6 +111,7 @@ func batchUpsertAibox_deviceHandler(w http.ResponseWriter, r *http.Request) {
 // @Param latest_heart_beat_time query string false "latest_heart_beat_time"
 // @Param status query string false "status"
 // @Param upgrade_tasks query string false "upgrade_tasks"
+// @Param model_info query string false "model_info"
 // @Produce  json
 // @Success 200 {object} common.Response{data=common.PageGeneric[model.Aibox_device]} "objects array"
 // @Failure 500 {object} common.Response ""
@@ -144,6 +145,7 @@ func Aibox_devicePageListHandler(w http.ResponseWriter, r *http.Request) {
 // @Param latest_heart_beat_time query string false "latest_heart_beat_time"
 // @Param status query string false "status"
 // @Param upgrade_tasks query string false "upgrade_tasks"
+// @Param model_info query string false "model_info"
 // @Produce  json
 // @Success 200 {object} common.Response{data=[]model.Aibox_device} "objects array"
 // @Failure 500 {object} common.Response ""

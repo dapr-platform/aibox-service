@@ -16,6 +16,7 @@ CREATE TABLE o_aibox_device (
     latest_heart_beat_time TIMESTAMP,
     status INTEGER NOT NULL DEFAULT 0,
     upgrade_tasks text,
+    model_info TEXT,
     PRIMARY KEY (id)
 );
 
@@ -28,6 +29,8 @@ COMMENT ON COLUMN o_aibox_device.device_time IS '设备时间';
 COMMENT ON COLUMN o_aibox_device.latest_heart_beat_time IS '最近心跳时间';
 COMMENT ON COLUMN o_aibox_device.status IS '设备状态(0:离线，1:在线)';
 COMMENT ON COLUMN o_aibox_device.upgrade_tasks IS '升级任务';
+COMMENT ON COLUMN o_aibox_device.model_info IS '模型信息';
+
 -- 事件表
 CREATE TABLE o_aibox_event (
     id VARCHAR(36) NOT NULL,
@@ -73,6 +76,7 @@ SELECT
     d.latest_heart_beat_time AS latest_heart_beat_time,
     d.status AS status,
     d.upgrade_tasks AS upgrade_tasks,
+    d.model_info AS model_info,
     CASE d.status 
         WHEN 0 THEN '离线'
         WHEN 1 THEN '在线'
