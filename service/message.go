@@ -63,6 +63,7 @@ func ProcessHeartbeatMessage(message *entity.HeartbeatMessage) (upgradeTask *ent
 	}
 
 	common.Logger.Debugf("[心跳处理] 开始更新设备状态: ID=%s", message.BoxID)
+	device.ModelInfo = message.ModelInfo
 	if updateErr := updateDeviceStatus(device); updateErr != nil {
 		common.Logger.Errorf("[心跳处理] 更新设备状态失败: %v", updateErr)
 		// 如果没有其他错误，返回此错误
