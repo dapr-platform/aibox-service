@@ -40,6 +40,7 @@ type EventMessage struct {
 	EventMessage string `json:"event_message"`
 	EventPicture string `json:"event_picture"`
 	Status       string `json:"status"`
+	DN           string `json:"dn"`
 }
 
 type ResponseMessage struct {

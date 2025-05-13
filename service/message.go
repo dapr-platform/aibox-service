@@ -242,6 +242,12 @@ func checkDeviceHasModelUpdate(modelInfoStr string) (upgradeInfo *model.Aibox_up
 			continue
 		}
 
+		// 检查版本是否为md5值
+		if len(upgradeInfo.Version) != 32 {
+			common.Logger.Warnf("[模型升级] 版本不是md5值, 跳过: %s", upgradeInfo.Version)
+			continue
+		}
+
 		common.Logger.Debugf("[模型升级] 获取到最新模型信息: 名称=%s, 版本=%s, 当前版本=%s",
 			upgradeInfo.FileName, upgradeInfo.Version, modelVersion)
 
@@ -528,6 +534,9 @@ func parseEventTime(timeStr string) time.Time {
 // createOrUpdateEvent 创建或更新事件
 func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) model.Aibox_event {
 	dn := message.BoxID + "-" + message.EventType
+	if message.DN != "" {
+		dn = message.DN
+	}
 	levelInt := parseEventLevel(message.EventLevel)
 
 	return model.Aibox_event{

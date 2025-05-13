@@ -50,7 +50,7 @@ CREATE TABLE o_aibox_event (
 
 COMMENT ON TABLE o_aibox_event IS 'AI盒子事件表';
 COMMENT ON COLUMN o_aibox_event.id IS '事件ID';
-COMMENT ON COLUMN o_aibox_event.dn IS '设备编号';
+COMMENT ON COLUMN o_aibox_event.dn IS '事件唯一值';
 COMMENT ON COLUMN o_aibox_event.title IS '事件标题';
 COMMENT ON COLUMN o_aibox_event.device_id IS '关联设备ID';
 COMMENT ON COLUMN o_aibox_event.content IS '事件内容';
@@ -147,7 +147,7 @@ LEFT JOIN
 
 COMMENT ON VIEW v_aibox_event_info IS 'AI盒子事件详情视图';
 COMMENT ON COLUMN v_aibox_event_info.id IS '事件ID';
-COMMENT ON COLUMN v_aibox_event_info.dn IS '设备编号';
+COMMENT ON COLUMN v_aibox_event_info.dn IS '事件唯一值';
 COMMENT ON COLUMN v_aibox_event_info.title IS '事件标题';
 COMMENT ON COLUMN v_aibox_event_info.device_id IS '关联设备ID';
 COMMENT ON COLUMN v_aibox_event_info.content IS '事件内容';
