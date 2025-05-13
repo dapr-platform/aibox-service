@@ -538,6 +538,24 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) mode
 		dn = message.DN
 	}
 	levelInt := parseEventLevel(message.EventLevel)
+	exists, err := common.DbGetOne[model.Aibox_event](
+		context.Background(),
+		common.GetDaprClient(),
+		model.Aibox_eventTableInfo.Name,
+		"dn="+dn,
+	)
+	if err != nil {
+		common.Logger.Errorf("查询事件失败: %v", err)
+	}
+	if exists != nil {
+		common.Logger.Infof("事件已存在: %s", dn)
+		exists.UpdatedTime = common.LocalTime(eventTime)
+		exists.Status = cast.ToInt32(message.Status)
+		exists.Level = int32(levelInt)
+		exists.Content = message.EventMessage
+		exists.Picstr = message.EventPicture
+		return *exists
+	}
 
 	return model.Aibox_event{
 		ID:          message.ID,
