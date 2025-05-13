@@ -262,7 +262,7 @@ func getLatestModelUpdateInfo(modelName string) (upgradeInfo *model.Aibox_update
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_update_infoTableInfo.Name,
-		"type=2&status=1&_order=-updated_time&filename="+modelName,
+		"type=2&status=1&_order=-updated_time&file_name="+modelName,
 	)
 	if err != nil {
 		common.Logger.Errorf("[模型升级] 数据库查询模型更新信息失败: %v", err)
