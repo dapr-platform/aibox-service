@@ -111,17 +111,28 @@ func downloadHandler(w http.ResponseWriter, r *http.Request) {
 		common.HttpResult(w, common.ErrParam.AppendMsg("版本号、类型或文件名不能为空"))
 		return
 	}
-	version = url.QueryEscape(version)
-	typeStr = url.QueryEscape(typeStr)
-	filename = url.QueryEscape(filename)
-
+	version, err := url.QueryUnescape(version)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg("版本号解码失败: "+err.Error()))
+		return
+	}
+	typeStr, err = url.QueryUnescape(typeStr)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg("类型解码失败: "+err.Error()))
+		return
+	}
+	filename, err = url.QueryUnescape(filename)
+	if err != nil {
+		common.HttpResult(w, common.ErrParam.AppendMsg("文件名解码失败: "+err.Error()))
+		return
+	}
 	// 构建文件路径
 	filePath := filepath.Join("uploads", typeStr, version, filename)
 
 	// 检查文件是否存在
 	fileInfo, err := os.Stat(filePath)
 	if os.IsNotExist(err) {
-		common.HttpResult(w, common.ErrNotFound.AppendMsg("文件不存在"))
+		common.HttpResult(w, common.ErrNotFound.AppendMsg("文件不存在:").AppendMsg(filePath))
 		return
 	}
 	if err != nil {
