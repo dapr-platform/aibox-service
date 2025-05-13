@@ -147,6 +147,9 @@ definitions:
       latest_heart_beat_time:
         description: 最近心跳时间
         type: string
+      model_info:
+        description: 模型信息
+        type: string
       name:
         description: 设备名称
         type: string
@@ -192,6 +195,9 @@ definitions:
       minor_event_count:
         description: 轻微事件数
         type: integer
+      model_info:
+        description: model_info
+        type: string
       name:
         description: 设备名称
         type: string
@@ -537,6 +543,10 @@ paths:
         in: query
         name: upgrade_tasks
         type: string
+      - description: model_info
+        in: query
+        name: model_info
+        type: string
       produces:
       - application/json
       responses:
@@ -631,6 +641,10 @@ paths:
       - description: upgrade_tasks
         in: query
         name: upgrade_tasks
+        type: string
+      - description: model_info
+        in: query
+        name: model_info
         type: string
       - description: status_name
         in: query
@@ -727,6 +741,10 @@ paths:
       - description: upgrade_tasks
         in: query
         name: upgrade_tasks
+        type: string
+      - description: model_info
+        in: query
+        name: model_info
         type: string
       - description: status_name
         in: query
@@ -922,6 +940,10 @@ paths:
       - description: upgrade_tasks
         in: query
         name: upgrade_tasks
+        type: string
+      - description: model_info
+        in: query
+        name: model_info
         type: string
       produces:
       - application/json

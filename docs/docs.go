@@ -260,6 +260,12 @@ const docTemplate = `{
                         "description": "upgrade_tasks",
                         "name": "upgrade_tasks",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "model_info",
+                        "name": "model_info",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -416,6 +422,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "model_info",
+                        "name": "model_info",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "status_name",
                         "name": "status_name",
                         "in": "query"
@@ -559,6 +571,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "upgrade_tasks",
                         "name": "upgrade_tasks",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "model_info",
+                        "name": "model_info",
                         "in": "query"
                     },
                     {
@@ -814,6 +832,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "upgrade_tasks",
                         "name": "upgrade_tasks",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "model_info",
+                        "name": "model_info",
                         "in": "query"
                     }
                 ],
@@ -2707,6 +2731,10 @@ const docTemplate = `{
                     "description": "最近心跳时间",
                     "type": "string"
                 },
+                "model_info": {
+                    "description": "模型信息",
+                    "type": "string"
+                },
                 "name": {
                     "description": "设备名称",
                     "type": "string"
@@ -2767,6 +2795,10 @@ const docTemplate = `{
                 "minor_event_count": {
                     "description": "轻微事件数",
                     "type": "integer"
+                },
+                "model_info": {
+                    "description": "model_info",
+                    "type": "string"
                 },
                 "name": {
                     "description": "设备名称",
