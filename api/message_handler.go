@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/http"
 
-	"aibox-service/config"
 	"aibox-service/entity"
 	"aibox-service/service"
 
@@ -79,17 +78,6 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 			Data: map[string]interface{}{
 				"status": "success",
 			},
-		}
-		if config.AUTO_UPGRADE {
-			// 检查设备是否需要更新
-			update, needUpdate := service.CheckDeviceUpdateNeeded(heartbeatMsg.BuildTime)
-			if needUpdate && update != nil {
-				// 设备需要更新，返回更新指令
-				response = service.GetDeviceUpdateResponse(update, r)
-				common.Logger.Infof("设备需要更新，返回更新指令: %v", response)
-			} else {
-				common.Logger.Infof("设备不需要更新")
-			}
 		}
 
 	case entity.MessageTypeEvent:

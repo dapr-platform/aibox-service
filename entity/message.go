@@ -27,6 +27,7 @@ type HeartbeatMessage struct {
 	IP        string `json:"ip"`
 	BoxName   string `json:"box_name"`
 	BuildTime string `json:"build_time"`
+	ModelInfo string `json:"model_info"`
 }
 
 type EventMessage struct {
