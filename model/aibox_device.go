@@ -29,11 +29,12 @@ Table: o_aibox_device
 [ 8] device_time                                    TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [ 9] latest_heart_beat_time                         TIMESTAMP            null: true   primary: false  isArray: false  auto: false  col: TIMESTAMP       len: -1      default: []
 [10] status                                         INT4                 null: false  primary: false  isArray: false  auto: false  col: INT4            len: -1      default: [0]
+[11] upgrade_tasks                                  TEXT                 null: true   primary: false  isArray: false  auto: false  col: TEXT            len: -1      default: []
 
 
 JSON Sample
 -------------------------------------
-{    "id": "YpcOAywIRKDdZkZKQFisUCriL",    "created_by": "poOKonmRmGSROXKsMlaakICeZ",    "created_time": 40,    "updated_by": "iNNuhuFtUZFosmioBJoPRZeeI",    "updated_time": 74,    "name": "HrSTyvPCiZkethsIXxPGnPXsJ",    "ip": "RtERbRxwQOmCbMJyiZnLAfaGP",    "build_time_str": "qkOkGKmyaTmKxluIywyrKUwUp",    "device_time": 20,    "latest_heart_beat_time": 27,    "status": 77}
+{    "id": "VaYFdOTejttHclRlQaMmAGkjD",    "created_by": "gqNaPiFdgkERGpnMebVROVLDF",    "created_time": 94,    "updated_by": "qmLwoZgoNDOcDygEeaduJtEsi",    "updated_time": 17,    "name": "dnSLjcmbBnHtgsixFyTMYyDeW",    "ip": "BAWfxxHNxoahSIMvXTTEuERAY",    "build_time_str": "TGkejpZHSfYbjwCjkqJFijfbg",    "device_time": 83,    "latest_heart_beat_time": 98,    "status": 78,    "upgrade_tasks": "ToVeEUPQjcUdlhuGcDIuHjYKE"}
 
 
 
@@ -61,6 +62,8 @@ var (
 	Aibox_device_FIELD_NAME_latest_heart_beat_time = "latest_heart_beat_time"
 
 	Aibox_device_FIELD_NAME_status = "status"
+
+	Aibox_device_FIELD_NAME_upgrade_tasks = "upgrade_tasks"
 )
 
 // Aibox_device struct is a row record of the o_aibox_device table in the  database
@@ -86,6 +89,8 @@ type Aibox_device struct {
 	LatestHeartBeatTime common.LocalTime `json:"latest_heart_beat_time"` //最近心跳时间
 
 	Status int32 `json:"status"` //设备状态(0:离线，1:在线)
+
+	UpgradeTasks string `json:"upgrade_tasks"` //升级任务
 
 }
 
@@ -322,6 +327,27 @@ var Aibox_deviceTableInfo = &TableInfo{
 			ProtobufFieldName:  "status",
 			ProtobufType:       "int32",
 			ProtobufPos:        11,
+		},
+
+		&ColumnInfo{
+			Index:              11,
+			Name:               "upgrade_tasks",
+			Comment:            `升级任务`,
+			Notes:              ``,
+			Nullable:           true,
+			DatabaseTypeName:   "TEXT",
+			DatabaseTypePretty: "TEXT",
+			IsPrimaryKey:       false,
+			IsAutoIncrement:    false,
+			IsArray:            false,
+			ColumnType:         "TEXT",
+			ColumnLength:       -1,
+			GoFieldName:        "UpgradeTasks",
+			GoFieldType:        "string",
+			JSONFieldName:      "upgrade_tasks",
+			ProtobufFieldName:  "upgrade_tasks",
+			ProtobufType:       "string",
+			ProtobufPos:        12,
 		},
 	},
 }

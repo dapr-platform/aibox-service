@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"encoding/json"
+	"net/http"
 	"strconv"
 	"time"
 
@@ -12,28 +14,8 @@ import (
 	"github.com/spf13/cast"
 )
 
-// ProcessMessage 处理收到的消息
-func ProcessMessage(message entity.Message) {
-	switch message.GetType() {
-	case entity.MessageTypeHeartbeat:
-		if heartbeatMsg, ok := message.(*entity.HeartbeatMessage); ok {
-			processHeartbeatMessage(heartbeatMsg)
-		} else {
-			common.Logger.Errorf("消息类型转换失败: 期望HeartbeatMessage, 实际类型: %T", message)
-		}
-	case entity.MessageTypeEvent:
-		if eventMsg, ok := message.(*entity.EventMessage); ok {
-			processEventMessage(eventMsg)
-		} else {
-			common.Logger.Errorf("消息类型转换失败: 期望EventMessage, 实际类型: %T", message)
-		}
-	default:
-		common.Logger.Warnf("未知消息类型: %s", message.GetType())
-	}
-}
-
 // processHeartbeatMessage 处理设备心跳消息
-func processHeartbeatMessage(message *entity.HeartbeatMessage) {
+func ProcessHeartbeatMessage(message *entity.HeartbeatMessage) (upgradeTask *entity.ResponseMessage, err error) {
 	common.Logger.Infof("收到心跳消息: 设备ID=%s, 时间=%s", message.BoxID, message.Time)
 
 	// 检查设备是否存在
@@ -90,6 +72,25 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 		device.UpdatedTime = common.LocalTime(time.Now())
 		device.UpdatedBy = "admin"
 
+		if device.UpgradeTasks != "" {
+			var upgradeTasks []entity.ResponseMessage
+			err = json.Unmarshal([]byte(device.UpgradeTasks), &upgradeTasks)
+			if err != nil {
+				common.Logger.Errorf("解析升级任务失败: %v", err)
+				return nil, err
+			}
+			if len(upgradeTasks) > 0 {
+				upgradeTask = &upgradeTasks[0]
+				upgradeTasks = upgradeTasks[1:]
+				upgradeTasksStr, err := json.Marshal(upgradeTasks)
+				if err != nil {
+					common.Logger.Errorf("序列化升级任务失败: %v", err)
+					return nil, err
+				}
+				device.UpgradeTasks = string(upgradeTasksStr)
+			}
+		}
+
 		err = common.DbUpsert[model.Aibox_device](
 			context.Background(),
 			common.GetDaprClient(),
@@ -101,10 +102,11 @@ func processHeartbeatMessage(message *entity.HeartbeatMessage) {
 			common.Logger.Errorf("更新设备心跳失败: %v", err)
 		}
 	}
+	return upgradeTask, nil
 }
 
 // processEventMessage 处理设备事件消息
-func processEventMessage(message *entity.EventMessage) {
+func ProcessEventMessage(message *entity.EventMessage) {
 	common.Logger.Infof("收到事件消息: 设备ID=%s, 事件类型=%s, 级别=%s",
 		message.BoxID, message.EventType, message.EventLevel)
 
@@ -261,4 +263,114 @@ func formatEventTitle(eventType, eventLevel string) string {
 	}
 
 	return levelName + "-" + eventType
+}
+
+func CheckDeviceHasUpgradeTask(deviceID string) (bool, error) {
+	device, err := common.DbGetOne[model.Aibox_device](
+		context.Background(),
+		common.GetDaprClient(),
+		model.Aibox_deviceTableInfo.Name,
+		"id="+deviceID,
+	)
+	if err != nil {
+		common.Logger.Errorf("获取设备信息失败: %v", err)
+		return false, err
+	}
+	if device == nil {
+		common.Logger.Warnf("设备不存在: %s", deviceID)
+		return false, nil
+	}
+
+	upgradeTasksStr := device.UpgradeTasks
+	if upgradeTasksStr == "" {
+		common.Logger.Debugf("设备没有升级任务: %s", deviceID)
+		return false, nil
+	}
+	var upgradeTasks []entity.ResponseMessage
+	err = json.Unmarshal([]byte(upgradeTasksStr), &upgradeTasks)
+	if err != nil {
+		common.Logger.Errorf("解析升级任务失败: %v", err)
+		return false, err
+	}
+
+	return len(upgradeTasks) > 0, nil
+}
+
+// CheckDeviceUpdateNeeded 检查设备是否需要软件更新
+func CheckDeviceUpdateNeeded(deviceBuildTime string) (*model.Aibox_update_info, bool) {
+	// 获取最新启用状态的应用版本
+	updates, err := common.DbQuery[model.Aibox_update_info](
+		context.Background(),
+		common.GetDaprClient(),
+		model.Aibox_update_infoTableInfo.Name,
+		"type=1&status=1&_order=-updated_time",
+	)
+
+	if err != nil {
+		common.Logger.Errorf("获取软件更新信息失败: %v", err)
+		return nil, false
+	}
+
+	if len(updates) == 0 {
+		common.Logger.Debugf("没有找到可用的软件更新")
+		return nil, false
+	}
+
+	latestUpdate := updates[0]
+
+	// 无法比较版本时，返回false
+	if deviceBuildTime == "" {
+		common.Logger.Warnf("设备版本信息为空，无法比较")
+		return nil, false
+	}
+
+	// 比较版本号，判断是否需要升级
+	// 简单情况下，假设构建时间较新的版本需要更新
+	deviceTime, deviceErr := time.Parse("2006-01-02_15:04:05", deviceBuildTime)
+	if deviceErr != nil {
+		common.Logger.Warnf("解析设备构建时间失败: %v，无法判断是否需要更新", deviceErr)
+		return nil, false
+	}
+	updateVersionTime, updateVersionErr := time.Parse("2006-01-02_15:04:05", latestUpdate.Version)
+	if updateVersionErr != nil {
+		common.Logger.Warnf("解析更新版本时间失败: %v，无法判断是否需要更新", updateVersionErr)
+		return nil, false
+	}
+
+	// 假设版本号格式类似于日期，可以直接比较
+	// 在实际应用中，可能需要根据实际的版本号格式进行更复杂的比较
+	if updateVersionTime.After(deviceTime) {
+		common.Logger.Infof("发现需要更新: 设备版本=%s, 最新版本=%s", deviceBuildTime, latestUpdate.Version)
+		return &latestUpdate, true
+	}
+
+	common.Logger.Debugf("设备版本已是最新: %s", deviceBuildTime)
+	return nil, false
+}
+
+// GetDeviceUpdateResponse 获取设备更新响应消息
+func GetDeviceUpdateResponse(update *model.Aibox_update_info, r *http.Request) entity.ResponseMessage {
+	// 构建下载URL
+	scheme := "http"
+	if r.TLS != nil {
+		scheme = "https"
+	}
+
+	host := r.Host
+	baseURL := scheme + "://" + host
+
+	// 构建下载URL
+	downloadURL := baseURL + common.BASE_CONTEXT + "/file/download?version=" +
+		update.Version + "&type=1&filename=" + update.FileName
+
+	return entity.ResponseMessage{
+		Action: "upgrade",
+		Data: map[string]interface{}{
+			"filename":    update.FileName,
+			"version":     update.Version,
+			"url":         downloadURL,
+			"md5":         update.FileKey,
+			"description": update.Description,
+		},
+	}
 }

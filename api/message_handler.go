@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 
+	"aibox-service/config"
 	"aibox-service/entity"
 	"aibox-service/service"
 
@@ -47,7 +48,8 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 根据消息类型解析完整消息
-	var message entity.Message
+	var response entity.ResponseMessage
+
 	switch baseMsg.Type {
 	case entity.MessageTypeHeartbeat:
 		var heartbeatMsg entity.HeartbeatMessage
@@ -56,7 +58,39 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 			return
 		}
-		message = &heartbeatMsg
+
+		// 同步处理心跳消息，并检查是否需要更新
+		upgradeTask, err := service.ProcessHeartbeatMessage(&heartbeatMsg)
+		if err != nil {
+			common.Logger.Errorf("处理心跳消息失败: %v", err)
+			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
+			return
+		}
+		if upgradeTask != nil {
+			response = *upgradeTask
+			common.Logger.Infof("设备需要更新，返回更新指令: %v", response)
+			common.HttpResult(w, common.OK.WithData(response))
+			return
+		}
+
+		// 设备不需要更新，返回普通确认
+		response = entity.ResponseMessage{
+			Action: "ack",
+			Data: map[string]interface{}{
+				"status": "success",
+			},
+		}
+		if config.AUTO_UPGRADE {
+			// 检查设备是否需要更新
+			update, needUpdate := service.CheckDeviceUpdateNeeded(heartbeatMsg.BuildTime)
+			if needUpdate && update != nil {
+				// 设备需要更新，返回更新指令
+				response = service.GetDeviceUpdateResponse(update, r)
+				common.Logger.Infof("设备需要更新，返回更新指令: %v", response)
+			} else {
+				common.Logger.Infof("设备不需要更新")
+			}
+		}
 
 	case entity.MessageTypeEvent:
 		var eventMsg entity.EventMessage
@@ -65,7 +99,17 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 			common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
 			return
 		}
-		message = &eventMsg
+
+		// 异步处理事件消息
+		go service.ProcessEventMessage(&eventMsg)
+
+		// 返回确认
+		response = entity.ResponseMessage{
+			Action: "ack",
+			Data: map[string]interface{}{
+				"status": "success",
+			},
+		}
 
 	default:
 		common.Logger.Warnf("未知消息类型: %s", baseMsg.Type)
@@ -73,15 +117,5 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// 处理消息
-	go service.ProcessMessage(message)
-
-	// 返回成功
-	response := entity.ResponseMessage{
-		Action: "ack",
-		Data: map[string]interface{}{
-			"status": "success",
-		},
-	}
 	common.HttpResult(w, common.OK.WithData(response))
 }

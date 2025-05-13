@@ -159,6 +159,9 @@ definitions:
       updated_time:
         description: updated_time
         type: string
+      upgrade_tasks:
+        description: 升级任务
+        type: string
     type: object
   model.Aibox_device_info:
     properties:
@@ -171,6 +174,9 @@ definitions:
       critical_event_count:
         description: 紧急事件数
         type: integer
+      device_time:
+        description: 设备时间
+        type: string
       id:
         description: 设备ID
         type: string
@@ -194,6 +200,9 @@ definitions:
         type: integer
       status_name:
         description: 设备状态名称
+        type: string
+      upgrade_tasks:
+        description: 升级任务
         type: string
       warning_event_count:
         description: 警告事件数
@@ -524,6 +533,10 @@ paths:
         in: query
         name: status
         type: string
+      - description: upgrade_tasks
+        in: query
+        name: upgrade_tasks
+        type: string
       produces:
       - application/json
       responses:
@@ -603,6 +616,10 @@ paths:
         in: query
         name: build_time_str
         type: string
+      - description: device_time
+        in: query
+        name: device_time
+        type: string
       - description: latest_heart_beat_time
         in: query
         name: latest_heart_beat_time
@@ -610,6 +627,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: upgrade_tasks
+        in: query
+        name: upgrade_tasks
         type: string
       - description: status_name
         in: query
@@ -691,6 +712,10 @@ paths:
         in: query
         name: build_time_str
         type: string
+      - description: device_time
+        in: query
+        name: device_time
+        type: string
       - description: latest_heart_beat_time
         in: query
         name: latest_heart_beat_time
@@ -698,6 +723,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: upgrade_tasks
+        in: query
+        name: upgrade_tasks
         type: string
       - description: status_name
         in: query
@@ -889,6 +918,10 @@ paths:
       - description: status
         in: query
         name: status
+        type: string
+      - description: upgrade_tasks
+        in: query
+        name: upgrade_tasks
         type: string
       produces:
       - application/json

@@ -15,6 +15,7 @@ CREATE TABLE o_aibox_device (
     device_time TIMESTAMP,
     latest_heart_beat_time TIMESTAMP,
     status INTEGER NOT NULL DEFAULT 0,
+    upgrade_tasks text,
     PRIMARY KEY (id)
 );
 
@@ -26,7 +27,7 @@ COMMENT ON COLUMN o_aibox_device.build_time_str IS '设备构建时间';
 COMMENT ON COLUMN o_aibox_device.device_time IS '设备时间';
 COMMENT ON COLUMN o_aibox_device.latest_heart_beat_time IS '最近心跳时间';
 COMMENT ON COLUMN o_aibox_device.status IS '设备状态(0:离线，1:在线)';
-
+COMMENT ON COLUMN o_aibox_device.upgrade_tasks IS '升级任务';
 -- 事件表
 CREATE TABLE o_aibox_event (
     id VARCHAR(36) NOT NULL,
@@ -71,6 +72,7 @@ SELECT
     d.device_time AS device_time,
     d.latest_heart_beat_time AS latest_heart_beat_time,
     d.status AS status,
+    d.upgrade_tasks AS upgrade_tasks,
     CASE d.status 
         WHEN 0 THEN '离线'
         WHEN 1 THEN '在线'
@@ -93,6 +95,7 @@ COMMENT ON COLUMN v_aibox_device_info.device_time IS '设备时间';
 COMMENT ON COLUMN v_aibox_device_info.latest_heart_beat_time IS '最近心跳时间';
 COMMENT ON COLUMN v_aibox_device_info.status IS '设备状态(0:离线，1:在线)';
 COMMENT ON COLUMN v_aibox_device_info.status_name IS '设备状态名称';
+COMMENT ON COLUMN v_aibox_device_info.upgrade_tasks IS '升级任务';
 COMMENT ON COLUMN v_aibox_device_info.active_event_count IS '活动事件总数';
 COMMENT ON COLUMN v_aibox_device_info.critical_event_count IS '紧急事件数';
 COMMENT ON COLUMN v_aibox_device_info.major_event_count IS '严重事件数';

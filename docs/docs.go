@@ -254,6 +254,12 @@ const docTemplate = `{
                         "description": "status",
                         "name": "status",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "upgrade_tasks",
+                        "name": "upgrade_tasks",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -386,6 +392,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "device_time",
+                        "name": "device_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "latest_heart_beat_time",
                         "name": "latest_heart_beat_time",
                         "in": "query"
@@ -394,6 +406,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "upgrade_tasks",
+                        "name": "upgrade_tasks",
                         "in": "query"
                     },
                     {
@@ -521,6 +539,12 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "device_time",
+                        "name": "device_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "latest_heart_beat_time",
                         "name": "latest_heart_beat_time",
                         "in": "query"
@@ -529,6 +553,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "upgrade_tasks",
+                        "name": "upgrade_tasks",
                         "in": "query"
                     },
                     {
@@ -778,6 +808,12 @@ const docTemplate = `{
                         "type": "string",
                         "description": "status",
                         "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "upgrade_tasks",
+                        "name": "upgrade_tasks",
                         "in": "query"
                     }
                 ],
@@ -2686,6 +2722,10 @@ const docTemplate = `{
                 "updated_time": {
                     "description": "updated_time",
                     "type": "string"
+                },
+                "upgrade_tasks": {
+                    "description": "升级任务",
+                    "type": "string"
                 }
             }
         },
@@ -2703,6 +2743,10 @@ const docTemplate = `{
                 "critical_event_count": {
                     "description": "紧急事件数",
                     "type": "integer"
+                },
+                "device_time": {
+                    "description": "设备时间",
+                    "type": "string"
                 },
                 "id": {
                     "description": "设备ID",
@@ -2734,6 +2778,10 @@ const docTemplate = `{
                 },
                 "status_name": {
                     "description": "设备状态名称",
+                    "type": "string"
+                },
+                "upgrade_tasks": {
+                    "description": "升级任务",
                     "type": "string"
                 },
                 "warning_event_count": {
