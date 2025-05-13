@@ -360,7 +360,7 @@ func GetDeviceUpdateResponse(update *model.Aibox_update_info, r *http.Request) e
 	baseURL := scheme + "://" + host
 
 	// 构建下载URL
-	downloadURL := baseURL + "/device/aibox-service/file/download?version=" +
+	downloadURL := baseURL + "/api/aibox-service/file/download?version=" +
 		update.Version + "&type=1&filename=" + update.FileName
 
 	return entity.ResponseMessage{
