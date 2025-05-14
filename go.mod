@@ -5,11 +5,13 @@ go 1.22.7
 toolchain go1.23.1
 
 require (
-	github.com/dapr-platform/common v1.0.0-20250221
+	github.com/dapr-platform/common v1.0.0-20250514
 	github.com/dapr/go-sdk v1.11.0
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/prometheus/client_golang v1.19.1
+	github.com/spf13/cast v1.7.0
 	github.com/swaggo/http-swagger v1.3.4
+	github.com/swaggo/swag v1.16.3
 )
 
 require (
@@ -31,9 +33,7 @@ require (
 	github.com/prometheus/common v0.48.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/spf13/cast v1.7.0 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
-	github.com/swaggo/swag v1.16.3 // indirect
 	go.opentelemetry.io/otel v1.32.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
