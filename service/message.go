@@ -539,43 +539,63 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) mode
 		dn = message.DN
 	}
 	levelInt := parseEventLevel(message.EventLevel)
-	exists, err := common.DbGetOne[model.Aibox_event](
+
+	isActive := (message.Status != "" && message.Status == "1")
+
+	existActive, err := common.DbGetOne[model.Aibox_event](
 		context.Background(),
 		common.GetDaprClient(),
 		model.Aibox_eventTableInfo.Name,
-		"dn="+dn,
+		"dn="+dn+"&status=1",
 	)
 	if err != nil {
 		common.Logger.Errorf("查询事件失败: %v", err)
-	}
-	if exists != nil {
-		common.Logger.Infof("事件已存在: %s", dn)
-		exists.UpdatedTime = common.LocalTime(eventTime)
-		exists.Status = cast.ToInt32(message.Status)
-		exists.Level = int32(levelInt)
-		exists.Content = message.EventMessage
-		exists.Picstr = message.EventPicture
-		return *exists
+		return model.Aibox_event{}
 	}
 
-	return model.Aibox_event{
-		ID:          message.ID,
-		CreatedBy:   "admin",
-		CreatedTime: common.LocalTime(eventTime),
-		UpdatedBy:   "admin",
-		UpdatedTime: common.LocalTime(eventTime),
-		Dn:          dn,
-		Title:       formatEventTitle(message.EventType, message.EventLevel),
-		DeviceID:    message.BoxID,
-		Content:     message.EventMessage,
-		Picstr:      message.EventPicture,
-		Level:       int32(levelInt),
-		Status:      cast.ToInt32(message.Status),
+	if isActive {
+		if existActive != nil {
+			existActive.Status = cast.ToInt32(message.Status)
+			saveEvent(*existActive)
+		}
+
+		return model.Aibox_event{
+			ID:          message.ID,
+			CreatedBy:   "admin",
+			CreatedTime: common.LocalTime(eventTime),
+			UpdatedBy:   "admin",
+			UpdatedTime: common.LocalTime(eventTime),
+			Dn:          dn,
+			Title:       formatEventTitle(message.EventType, message.EventLevel),
+			DeviceID:    message.BoxID,
+			Content:     message.EventMessage,
+			Picstr:      message.EventPicture,
+			Level:       int32(levelInt),
+			Status:      cast.ToInt32(message.Status),
+		}
+	} else {
+
+		if err != nil {
+			common.Logger.Errorf("查询事件失败: %v", err)
+		}
+
+		if existActive != nil {
+			common.Logger.Infof("事件已存在: %s", dn)
+			existActive.Status = cast.ToInt32(message.Status)
+			existActive.ID = message.ID
+			return *existActive
+		} else {
+			return model.Aibox_event{}
+		}
 	}
+
 }
 
 // saveEvent 保存事件
 func saveEvent(event model.Aibox_event) error {
+	if event.ID == "" {
+		return nil
+	}
 	return common.DbUpsert[model.Aibox_event](
 		context.Background(),
 		common.GetDaprClient(),
