@@ -453,8 +453,8 @@ func ProcessEventMessage(message *entity.EventMessage) {
 	}
 
 	eventTime := parseEventTime(message.Time)
-	event := createOrUpdateEvent(message, eventTime)
-	if err := saveEvent(event); err != nil {
+	err = createOrUpdateEvent(message, eventTime)
+	if err != nil {
 		common.Logger.Errorf("保存事件失败: %v", err)
 	}
 }
@@ -587,7 +587,7 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) erro
 			return nil
 		}
 	}
-
+	return nil
 }
 
 // saveEvent 保存事件
