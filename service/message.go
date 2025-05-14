@@ -18,6 +18,28 @@ import (
 	"github.com/spf13/cast"
 )
 
+func init() {
+	if config.EVENT_EXPIRE_DAY > 0 {
+		go loopDeleteExpiredEvent()
+	}
+}
+func loopDeleteExpiredEvent() {
+	for {
+		time.Sleep(time.Hour)
+		common.Logger.Infof("开始删除过期事件")
+		err := common.DbDeleteExpired(
+			context.Background(),
+			common.GetDaprClient(),
+			model.Aibox_eventTableInfo.Name,
+			"updated_time",
+			time.Now().AddDate(0, 0, -config.EVENT_EXPIRE_DAY),
+		)
+		if err != nil {
+			common.Logger.Errorf("删除过期事件失败: %v", err)
+		}
+	}
+}
+
 // ProcessHeartbeatMessage 处理设备心跳消息
 func ProcessHeartbeatMessage(message *entity.HeartbeatMessage) (upgradeTask *entity.ResponseMessage, err error) {
 	common.Logger.Debugf("[心跳处理] 开始处理设备心跳: ID=%s, IP=%s, 时间=%s, 版本=%s",
