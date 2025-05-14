@@ -533,7 +533,7 @@ func parseEventTime(timeStr string) time.Time {
 }
 
 // createOrUpdateEvent 创建或更新事件
-func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) model.Aibox_event {
+func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) error {
 	dn := message.BoxID + "-" + message.EventType
 	if message.DN != "" {
 		dn = message.DN
@@ -550,16 +550,16 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) mode
 	)
 	if err != nil {
 		common.Logger.Errorf("查询事件失败: %v", err)
-		return model.Aibox_event{}
+		return err
 	}
 
 	if isActive {
 		if existActive != nil {
-			existActive.Status = cast.ToInt32(message.Status)
+			existActive.Status = 0
 			saveEvent(*existActive)
 		}
 
-		return model.Aibox_event{
+		saveEvent(model.Aibox_event{
 			ID:          message.ID,
 			CreatedBy:   "admin",
 			CreatedTime: common.LocalTime(eventTime),
@@ -572,7 +572,7 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) mode
 			Picstr:      message.EventPicture,
 			Level:       int32(levelInt),
 			Status:      cast.ToInt32(message.Status),
-		}
+		})
 	} else {
 
 		if err != nil {
@@ -581,11 +581,10 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) mode
 
 		if existActive != nil {
 			common.Logger.Infof("事件已存在: %s", dn)
-			existActive.Status = cast.ToInt32(message.Status)
-			existActive.ID = message.ID
-			return *existActive
+			existActive.Status = 0
+			return saveEvent(*existActive)
 		} else {
-			return model.Aibox_event{}
+			return nil
 		}
 	}
 
