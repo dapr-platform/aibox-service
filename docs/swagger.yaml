@@ -452,6 +452,11 @@ paths:
         in: query
         name: _order
         type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
+        type: string
       - description: level
         in: query
         name: level
@@ -710,6 +715,11 @@ paths:
         in: query
         name: _order
         type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
+        type: string
       - description: id
         in: query
         name: id
@@ -892,6 +902,11 @@ paths:
       - description: order
         in: query
         name: _order
+        type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
         type: string
       - description: id
         in: query
@@ -1191,6 +1206,11 @@ paths:
         in: query
         name: _order
         type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
+        type: string
       - description: id
         in: query
         name: id
@@ -1377,6 +1397,11 @@ paths:
       - description: order
         in: query
         name: _order
+        type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
         type: string
       - description: id
         in: query
@@ -1656,6 +1681,11 @@ paths:
         in: query
         name: _order
         type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
+        type: string
       - description: id
         in: query
         name: id
@@ -1826,6 +1856,11 @@ paths:
       - description: order
         in: query
         name: _order
+        type: string
+      - description: _select
+        in: query
+        name: _select
+        required: true
         type: string
       - description: id
         in: query

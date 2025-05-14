@@ -24,6 +24,7 @@ func InitAibox_update_infoRoute(r chi.Router) {
 // @Param _page query int true "current page"
 // @Param _page_size query int true "page size"
 // @Param _order query string false "order"
+// @Param _select query string true "_select"
 // @Param id query string false "id"
 // @Param version query string false "version"
 // @Param type query string false "type"

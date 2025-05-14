@@ -114,6 +114,13 @@
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "level",
                         "name": "level",
                         "in": "query"
@@ -520,6 +527,13 @@
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -754,6 +768,13 @@
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -1270,6 +1291,13 @@
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -1510,6 +1538,13 @@
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -1996,6 +2031,13 @@
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -2212,6 +2254,13 @@
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",

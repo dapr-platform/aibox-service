@@ -37,7 +37,7 @@ Table: v_aibox_device_info
 
 JSON Sample
 -------------------------------------
-{    "id": "BXxBhHoWEUtNMXAusICqeSAWy",    "name": "vwkjbOclvXQDnTnMRfMRtodmM",    "ip": "fhJYnNZZZeOglqcGBylKOFfaL",    "build_time_str": "eXafjoCDAoRXWXqxBJpXYXLMv",    "device_time": 37,    "latest_heart_beat_time": 88,    "status": 61,    "upgrade_tasks": "PbZEyilPQCorJQyACLDEfHPWo",    "model_info": "nLNNWdGWrNxDUEYvyFyCFsaJM",    "status_name": "fONyRadNsQYBcVMlSmfZwaUaj",    "active_event_count": 31,    "critical_event_count": 5,    "major_event_count": 25,    "minor_event_count": 34,    "warning_event_count": 95}
+{    "id": "dqApSfYInhiXjXXLXbrXWdjuP",    "name": "HxIMIiUFFUYviCrObgjuDaSQK",    "ip": "txBsjDDWZfgVsfFAoNkleoyhX",    "build_time_str": "OJvkTRdmpxxlBfAVMEqIOplBN",    "device_time": 9,    "latest_heart_beat_time": 10,    "status": 21,    "upgrade_tasks": "SgKichFTolxDIxZoRITvqfhWr",    "model_info": "NyQPtvNHjGVFrwGdoRTENPotk",    "status_name": "osCpqXKtrCCKBriAoHrkryHUg",    "active_event_count": 51,    "critical_event_count": 61,    "major_event_count": 1,    "minor_event_count": 47,    "warning_event_count": 21}
 
 
 Comments

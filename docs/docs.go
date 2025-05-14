@@ -121,6 +121,13 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "level",
                         "name": "level",
                         "in": "query"
@@ -527,6 +534,13 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -761,6 +775,13 @@ const docTemplate = `{
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -1277,6 +1298,13 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -1517,6 +1545,13 @@ const docTemplate = `{
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -2003,6 +2038,13 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "query"
@@ -2219,6 +2261,13 @@ const docTemplate = `{
                         "description": "order",
                         "name": "_order",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "_select",
+                        "name": "_select",
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",

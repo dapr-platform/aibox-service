@@ -35,7 +35,7 @@ Table: o_aibox_device
 
 JSON Sample
 -------------------------------------
-{    "id": "QJMumsNoEfhqjcYRYqHKqCfgQ",    "created_by": "spOQKfUnvQgrbiuhZFEdwjFFe",    "created_time": 53,    "updated_by": "mpjuMKXmhDffUkhRuWYIHUkSg",    "updated_time": 82,    "name": "YbCbfTGOOOSwdTJoyYqBnXYum",    "ip": "vOJCbIsfdaFjSRSjLBenShfNf",    "build_time_str": "fvFAvZnLsLPcmIQKCsAyQfaEt",    "device_time": 24,    "latest_heart_beat_time": 77,    "status": 93,    "upgrade_tasks": "TjWyAboFmrJgHcFdKMFyxPnde",    "model_info": "IeHwsUdQtYRIbTTXjpBaKBBHa"}
+{    "id": "FIteWKcHZEteeJLEYpqSxxkND",    "created_by": "PrSDBOwvMQnJjaTghMfABDkKy",    "created_time": 84,    "updated_by": "gusYqIidZjElkQamcjxdlQBIX",    "updated_time": 69,    "name": "OuAmjOItrCSNgYZkVlmJRpcsq",    "ip": "JRKgcwwGFIJSfEnhiJqdlHHpp",    "build_time_str": "PfCqTgHUSpCTRRijwYUARqCkv",    "device_time": 93,    "latest_heart_beat_time": 56,    "status": 73,    "upgrade_tasks": "IuyidqlISUKkZYKdpeqHyWeZa",    "model_info": "TThAqSEVWOVJlNxnflugTHyvV"}
 
 
 
