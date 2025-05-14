@@ -556,6 +556,7 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) erro
 	if isActive {
 		if existActive != nil {
 			existActive.Status = 0
+			existActive.UpdatedTime = common.LocalTime(time.Now())
 			if err := saveEvent(*existActive); err != nil {
 				common.Logger.Errorf("更新已存在事件状态失败: %v", err)
 				return err
@@ -580,6 +581,7 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) erro
 		if existActive != nil {
 			common.Logger.Infof("事件已存在: %s", dn)
 			existActive.Status = 0
+			existActive.UpdatedTime = common.LocalTime(time.Now())
 			return saveEvent(*existActive)
 		}
 	}
