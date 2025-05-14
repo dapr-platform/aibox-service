@@ -556,10 +556,13 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) erro
 	if isActive {
 		if existActive != nil {
 			existActive.Status = 0
-			saveEvent(*existActive)
+			if err := saveEvent(*existActive); err != nil {
+				common.Logger.Errorf("更新已存在事件状态失败: %v", err)
+				return err
+			}
 		}
 
-		saveEvent(model.Aibox_event{
+		return saveEvent(model.Aibox_event{
 			ID:          message.ID,
 			CreatedBy:   "admin",
 			CreatedTime: common.LocalTime(eventTime),
@@ -574,17 +577,10 @@ func createOrUpdateEvent(message *entity.EventMessage, eventTime time.Time) erro
 			Status:      cast.ToInt32(message.Status),
 		})
 	} else {
-
-		if err != nil {
-			common.Logger.Errorf("查询事件失败: %v", err)
-		}
-
 		if existActive != nil {
 			common.Logger.Infof("事件已存在: %s", dn)
 			existActive.Status = 0
 			return saveEvent(*existActive)
-		} else {
-			return nil
 		}
 	}
 	return nil
