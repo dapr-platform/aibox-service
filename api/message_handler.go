@@ -1,6 +1,7 @@
 package api
 
 import (
+	"compress/gzip"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -29,8 +30,24 @@ func InitMessageRoute(r chi.Router) {
 func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	common.Logger.Debug("收到消息请求")
 
+	// 读取请求体，处理可能的gzip压缩
+	var bodyReader io.ReadCloser = r.Body
+	
+	// 检查是否是gzip压缩
+	if r.Header.Get("Content-Encoding") == "gzip" {
+		common.Logger.Debug("收到gzip压缩请求，解压处理")
+		var err error
+		bodyReader, err = gzip.NewReader(r.Body)
+		if err != nil {
+			common.Logger.Errorf("gzip解压失败: %v", err)
+			common.HttpResult(w, common.ErrService.AppendMsg("gzip解压失败: "+err.Error()))
+			return
+		}
+		defer bodyReader.Close()
+	}
+
 	// 读取请求体
-	body, err := io.ReadAll(r.Body)
+	body, err := io.ReadAll(bodyReader)
 	if err != nil {
 		common.Logger.Errorf("读取请求体失败: %v", err)
 		common.HttpResult(w, common.ErrService.AppendMsg(err.Error()))
@@ -38,6 +55,7 @@ func ProcessMessageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
+	
 	// 首先解析为基础消息，确定消息类型
 	var baseMsg entity.BaseMessage
 	if err := json.Unmarshal(body, &baseMsg); err != nil {
